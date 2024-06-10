@@ -19,9 +19,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
   });
 });
 
-Route::group(['middleware' => 'sanctum:guest'], function () {
-  // 未認証ユーザー向けのルートをここに追加
-  Route::get('/guest', function () {
-    return response()->json(['message' => 'This is a guest route']);
-  });
-});
+// Route::group(['middleware' => 'sanctum:guest'], function () {
+//   // 未認証ユーザー向けのルートをここに追加
+//   Route::get('/guest', function () {
+//     return response()->json(['message' => 'This is a guest route']);
+//   });
+// });
