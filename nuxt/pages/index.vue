@@ -8,7 +8,7 @@
         <p class="text-black">
           説明説明説明説明説明説明説明説明説明説明説明説明
         </p>
-        <a href="#" class="btn">ログイン</a>
+        <a href="/login" class="btn">ログイン</a>
         <a href="#" class="btn">新規登録</a>
         <a href="#" class="btn">ジュース検索</a>
       </div>
