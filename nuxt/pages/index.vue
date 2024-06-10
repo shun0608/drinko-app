@@ -4,9 +4,13 @@
       <div
         class="absolute inset-0 z-10 flex flex-col items-center justify-center"
       >
-        <h1>Drinko</h1>
+        <h1 class="text-black">Drinko</h1>
+        <p class="text-black">
+          説明説明説明説明説明説明説明説明説明説明説明説明
+        </p>
         <a href="#" class="btn">ログイン</a>
-        <a href="#"></a>
+        <a href="#" class="btn">新規登録</a>
+        <a href="#" class="btn">ジュース検索</a>
       </div>
       <div class="relative">
         <span class="block w-full h-dvh bg-white opacity-50 absolute"></span>
