@@ -769,7 +769,7 @@
     which "^3.0.1"
     ws "^8.17.0"
 
-"@nuxt/kit@3.11.2", "@nuxt/kit@^3.11.2", "@nuxt/kit@^3.9.0":
+"@nuxt/kit@3.11.2", "@nuxt/kit@^3.11.2", "@nuxt/kit@^3.2.0", "@nuxt/kit@^3.9.0":
   version "3.11.2"
   resolved "https://registry.yarnpkg.com/@nuxt/kit/-/kit-3.11.2.tgz#dfc43c05992691bcd6aa58c14f88cf43e3abb788"
   integrity sha512-yiYKP0ZWMW7T3TCmsv4H8+jEsB/nFriRAR8bKoSqSV9bkVYWPE36sf7JDux30dQ91jSlQG6LQkB3vCHYTS2cIg==
@@ -4693,6 +4693,14 @@ nuxt-auth-sanctum@^0.3.14:
     "@nuxt/kit" "^3.9.0"
     defu "^6.1.4"
 
+nuxt-sanctum-auth@^0.4.7:
+  version "0.4.7"
+  resolved "https://registry.yarnpkg.com/nuxt-sanctum-auth/-/nuxt-sanctum-auth-0.4.7.tgz#9ec9b561453887de6e1709980f70f0e9810fb365"
+  integrity sha512-6a3oq4YoCIjMpzdu2vYc6P6VOwwGJA7bv5cNd9JJFIaOPEfnTflYaltYRCqjhA+Mq3U6wcOdJFMtVrx3alqt2Q==
+  dependencies:
+    "@nuxt/kit" "^3.2.0"
+    ofetch "^1.0.0"
+
 nuxt@^3.11.2:
   version "3.11.2"
   resolved "https://registry.yarnpkg.com/nuxt/-/nuxt-3.11.2.tgz#38e14b96ff5669b1fbae7fc99e8d79042dce658d"
@@ -4776,7 +4784,7 @@ object-hash@^3.0.0:
   resolved "https://registry.yarnpkg.com/object-hash/-/object-hash-3.0.0.tgz#73f97f753e7baffc0e2cc9d6e079079744ac82e9"
   integrity sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw==
 
-ofetch@^1.3.3, ofetch@^1.3.4:
+ofetch@^1.0.0, ofetch@^1.3.3, ofetch@^1.3.4:
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/ofetch/-/ofetch-1.3.4.tgz#7ea65ced3c592ec2b9906975ae3fe1d26a56f635"
   integrity sha512-KLIET85ik3vhEfS+3fDlc/BAZiAp+43QEC/yCo5zkNoY2YaKvNkOaFr/6wCFgFH1kuYQM5pMNi0Tg8koiIemtw==

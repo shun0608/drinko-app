@@ -16,6 +16,7 @@
     "daisyui": "^4.12.2",
     "nuxt": "^3.11.2",
     "nuxt-auth-sanctum": "^0.3.14",
+    "nuxt-sanctum-auth": "^0.4.7",
     "vue": "^3.4.27",
     "vue-router": "^4.3.2"
   },

@@ -21,15 +21,23 @@
 </template>
 
 <script setup>
-definePageMeta({
-  middleware: "guest",
-});
+import { ref } from "vue";
+import { useNuxtApp } from "#app";
+// definePageMeta({
+//   middleware: "guest",
+// });
+
 const { $sanctumAuth } = useNuxtApp();
 const router = useRouter();
+
+// フォームデータを保持するためのリファレンス
+const email = ref("");
+const password = ref("");
+
 const login = async () => {
   await $sanctumAuth.login({
-    email: "test@test.com",
-    password: "password",
+    email: email.value,
+    password: password.value,
   });
 };
 </script>
