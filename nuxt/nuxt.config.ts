@@ -1,7 +1,5 @@
 export default defineNuxtConfig({
-  modules: [
-    'nuxt-auth-sanctum'
-  ],
+  modules: ['nuxt-auth-sanctum', '@nuxtjs/tailwindcss'],
   ssr: false,
   devtools: { enabled: true },
   nuxtSanctumAuth: {

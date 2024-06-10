@@ -21,9 +21,9 @@
 </template>
 
 <script setup>
-definePageMeta({
-  middleware: "guest",
-});
+// definePageMeta({
+//   middleware: "guest",
+// });
 const { $sanctumAuth } = useNuxtApp();
 const router = useRouter();
 const login = async () => {
