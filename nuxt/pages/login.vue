@@ -26,7 +26,7 @@ definePageMeta({
 });
 const { $sanctumAuth } = useNuxtApp();
 const router = useRouter();
-const kogin = async () => {
+const login = async () => {
   await $sanctumAuth.login({
     email: "test@test.com",
     password: "password",

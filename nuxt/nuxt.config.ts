@@ -2,10 +2,6 @@ export default defineNuxtConfig({
   modules: [
     'nuxt-auth-sanctum'
   ],
-  server: {
-    port: 80,
-    host: 'localhost',
-  },
   ssr: false,
   devtools: { enabled: true },
   nuxtSanctumAuth: {
