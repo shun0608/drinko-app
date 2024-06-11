@@ -28,6 +28,9 @@ const errors = ref([]);
 // フォームデータを保持するためのリファレンス
 const email = ref("");
 const password = ref("");
+definePageMeta({
+  middleware: "guest",
+});
 
 const login = async () => {
   try {
