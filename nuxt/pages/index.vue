@@ -1,6 +1,53 @@
+<script setup>
+const { $sanctumAuth } = useNuxtApp();
+const loading = ref(true);
+const auth = useAuth();
+onMounted(async () => {
+  await $sanctumAuth.getUser();
+  loading.value = false;
+});
+console.log(auth.loggedIn);
+
+const logout = async () => {
+  await $sanctumAuth.logout();
+  (data) => {
+    navigateTo("/", {
+      external: true,
+    });
+  };
+};
+</script>
+
 <template>
   <div>
-    <div class="relative">
+    <div v-if="auth.loggedIn">ログインなう</div>
+    <div v-else>ログインしてないよーん</div>
+    <a href="/login" class="btn">ログイン</a>
+    <button class="btn" @click="logout">ログアウト</button>
+    <!-- <div v-if="loggedIn" class="relative">
+      <div
+        class="absolute inset-0 z-10 flex flex-col items-center justify-center"
+      >
+        <h1 class="text-black">Drinko</h1>
+        <p class="text-black">
+          説明説明説明説明説明説明説明説明説明説明説明説明
+        </p>
+        <a href="#" class="btn">ジュース検索</a>
+        <div>
+          <p class="text-black">こんにちは{{ user.name }}さん</p>
+          <button class="btn" @click="logout">ログアウト</button>
+        </div>
+      </div>
+      <div class="relative">
+        <span class="block w-full h-dvh bg-white opacity-50 absolute"></span>
+        <img
+          src="~/assets/img/keyvisual-pc.jpg"
+          alt="キービジュアル"
+          class="w-full h-dvh object-cover"
+        />
+      </div>
+    </div>
+    <div v-else class="relative">
       <div
         class="absolute inset-0 z-10 flex flex-col items-center justify-center"
       >
@@ -20,6 +67,6 @@
           class="w-full h-dvh object-cover"
         />
       </div>
-    </div>
+    </div> -->
   </div>
 </template>

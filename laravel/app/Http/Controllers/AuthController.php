@@ -21,4 +21,15 @@ class AuthController extends Controller
     // 以下の1行は要検討
     return response()->json(['message' => '認証に失敗しました'], 401);
   }
+
+  public function logout(Request $request)
+  {
+    Auth::logout();
+
+    $request->session()->invalidate();
+
+    $request->session()->regenerateToken();
+    return response()->json(['message' => 'ログアウト成功']);
+    // return redirect('/');
+  }
 }

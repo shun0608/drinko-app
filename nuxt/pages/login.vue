@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <form action="">
+      <form>
         <dl>
           <dt>メールアドレス</dt>
           <dd>
@@ -22,23 +22,31 @@
 
 <script setup>
 import { ref } from "vue";
-import { useNuxtApp } from "#app";
-// definePageMeta({
-//   middleware: "guest",
-// });
-
 const { $sanctumAuth } = useNuxtApp();
-const router = useRouter();
+const errors = ref([]);
 
 // フォームデータを保持するためのリファレンス
 const email = ref("");
 const password = ref("");
 
 const login = async () => {
-  await $sanctumAuth.login({
-    email: email.value,
-    password: password.value,
-  });
+  try {
+    await $sanctumAuth.login(
+      {
+        email: email.value,
+        password: password.value,
+      },
+      // optional callback function
+      (data) => {
+        navigateTo("/", {
+          external: true,
+        });
+      }
+    );
+  } catch (e) {
+    errors.value = e.errors;
+    console.log(errors.value);
+  }
 };
 </script>
 
