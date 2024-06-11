@@ -2,7 +2,7 @@ export default defineNuxtConfig({
   modules: ['nuxt-sanctum-auth', '@nuxtjs/tailwindcss'],
   ssr: false,
   devtools: { enabled: true },
-  nuxtsanctumAuth: {
+  nuxtSanctumAuth: {
     token: false,
     baseUrl: "http://localhost:8000",
     endpoints: {
