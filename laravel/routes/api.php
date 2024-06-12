@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UsersController;
 use App\Models\User;
 
 Route::controller(AuthController::class)->group(function () {
@@ -17,6 +18,8 @@ Route::get('/user', function (Request $request) {
   \Log::info($user);
   return $user;
 })->middleware('auth:sanctum');
+
+Route::post('/register', [UsersController::class, 'store']);
 
 // Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 //   $user = $request->user();
