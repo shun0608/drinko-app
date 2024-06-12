@@ -25,12 +25,13 @@ import { ref } from "vue";
 const { $sanctumAuth } = useNuxtApp();
 const errors = ref([]);
 
-// フォームデータを保持するためのリファレンス
-const email = ref("");
-const password = ref("");
 definePageMeta({
   middleware: "guest",
 });
+
+// フォームデータを保持するためのリファレンス
+const email = ref("");
+const password = ref("");
 
 const login = async () => {
   try {

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Response;
 
 class UsersController extends Controller
 {
@@ -28,23 +30,30 @@ class UsersController extends Controller
    */
   public function store(Request $request)
   {
-    try {
-      // $userインスタンスを作成する
-      $user = new User();
+    User::create([
+      'name' =>  $request->name,
+      'email' => $request->email,
+      'password' => Hash::make($request->password),
+    ]);
 
-      // 投稿フォームから送信されたデータを取得し、インスタンスの属性に代入する
-      $user->name = $request->input('name');
-      $user->email = $request->input('email');
-      $user->password = $request->input('password');
+    return response()->json(['created' => true], Response::HTTP_OK);
+    // try {
+    //   // $userインスタンスを作成する
+    //   $user = new User();
 
-      // データベースに保存
-      $user->save();
+    //   // 投稿フォームから送信されたデータを取得し、インスタンスの属性に代入する
+    //   $user->name = $request->input('name');
+    //   $user->email = $request->input('email');
+    //   $user->password = $request->input('password');
 
-      return back();
-    } catch (\Exception $e) {
-      // 下記については、要修正
-      return redirect()->route('users.create')->with('message', '登録に失敗しました。' . $e->getMessage());
-    }
+    //   // データベースに保存
+    //   $user->save();
+
+    //   return back();
+    // } catch (\Exception $e) {
+    //   // 下記については、要修正
+    //   return redirect()->route('users.create')->with('message', '登録に失敗しました。' . $e->getMessage());
+    // }
   }
 
   /**
