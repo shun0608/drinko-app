@@ -17,10 +17,9 @@ class AuthController extends Controller
 
     if (Auth::attempt($credentials)) {
       $request->session()->regenerate();
-      return response()->json(['message' => 'ログイン成功']);
+      return response()->json(['message' => 'ログインしました。']);
     }
-    // 以下の1行は要検討
-    return response()->json(['message' => '認証に失敗しました'], 401);
+    return response()->json(['message' => 'ログインできませんでした。メールアドレスまたはパスワードが異なります。'], 401);
   }
 
   public function logout(Request $request)

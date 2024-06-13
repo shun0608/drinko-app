@@ -64,8 +64,7 @@ const login = async () => {
       }
     );
   } catch (e) {
-    errors.value = e.errors;
-    console.log(errors.value);
+    console.log(e.message);
   }
 };
 </script>
