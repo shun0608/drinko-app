@@ -22,6 +22,8 @@
 
 <script setup>
 import { ref } from "vue";
+import { useForm, useField } from "vee-validate";
+import * as yup from "yup";
 const { $sanctumAuth } = useNuxtApp();
 const errors = ref([]);
 
@@ -29,9 +31,17 @@ definePageMeta({
   middleware: "guest",
 });
 
-// フォームデータを保持するためのリファレンス
-const email = ref("");
-const password = ref("");
+const { value: email, errorMessage: emailError } = useField(
+  "email",
+  yup
+    .string()
+    .required("この項目は必須です")
+    .email("メールアドレスの形式で入力してください")
+);
+const { value: password, errorMessage: passwordError } = useField(
+  "password",
+  yup.string().required("この項目は必須です")
+);
 
 const login = async () => {
   try {
