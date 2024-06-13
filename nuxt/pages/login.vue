@@ -7,12 +7,18 @@
           <dd>
             <input id="email" type="string" v-model="email" />
           </dd>
+          <dd>
+            <p>{{ emailError }}</p>
+          </dd>
         </dl>
         <dl>
           <dt>
             <label for="password">パスワード</label>
           </dt>
           <dd><input id="password" type="password" v-model="password" /></dd>
+          <dd>
+            <p>{{ passwordError }}</p>
+          </dd>
         </dl>
         <button type="button" @click="login">ログイン</button>
       </form>

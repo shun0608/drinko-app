@@ -30,6 +30,12 @@ const responseMessage = ref("");
 
 const register = async () => {
   try {
+    // const testpo = JSON.stringify({
+    //   name: name.value,
+    //   email: email.value,
+    //   password: password.value,
+    // });
+    // console.log(testpo);
     const response = await $apiFetch("/api/register", {
       method: "POST",
       headers: {
@@ -66,7 +72,7 @@ const register = async () => {
       </dl>
       <dl>
         <dt>ニックネーム</dt>
-        <dd><input v-model="name" type="string" /></dd>
+        <dd><input v-model="name" type="string" name="name" /></dd>
         <dd>
           <p>{{ nameError }}</p>
         </dd>
