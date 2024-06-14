@@ -28,12 +28,12 @@
 
 <script setup>
 import { ref } from "vue";
-import { useForm, useField } from "vee-validate";
+import { useField } from "vee-validate";
 import * as yup from "yup";
 
+const router = useRouter();
 const { $sanctumAuth } = useNuxtApp();
 const { $toast } = useNuxtApp();
-const errors = ref([]);
 
 definePageMeta({
   middleware: "guest",
@@ -60,9 +60,11 @@ const login = async () => {
       },
       // optional callback function
       (data) => {
-        navigateTo("/", {
-          external: true,
-        });
+        // navigateTo("/", {
+        //   external: true,
+        // });
+        // router.push('/')
+        router.push({ path: "/", query: { loggedin: "true" } });
       }
     );
   } catch (e) {

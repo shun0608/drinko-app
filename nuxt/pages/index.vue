@@ -1,10 +1,24 @@
 <script setup>
+import { onMounted } from "vue";
+
 const { $sanctumAuth } = useNuxtApp();
 const loading = ref(true);
 const auth = useAuth();
+const route = useRoute();
+const { $toast } = useNuxtApp();
+
 onMounted(async () => {
   await $sanctumAuth.getUser();
   loading.value = false;
+});
+
+onMounted(() => {
+  if (route.query.loggedin == "true") {
+    $toast.open({
+      message: "ログインしました。",
+      type: "success",
+    });
+  }
 });
 
 const logout = async () => {
