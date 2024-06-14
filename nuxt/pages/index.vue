@@ -6,7 +6,6 @@ onMounted(async () => {
   await $sanctumAuth.getUser();
   loading.value = false;
 });
-console.log(auth.loggedIn);
 
 const logout = async () => {
   await $sanctumAuth.logout();

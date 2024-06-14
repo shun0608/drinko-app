@@ -30,7 +30,9 @@
 import { ref } from "vue";
 import { useForm, useField } from "vee-validate";
 import * as yup from "yup";
+
 const { $sanctumAuth } = useNuxtApp();
+const { $toast } = useNuxtApp();
 const errors = ref([]);
 
 definePageMeta({
@@ -64,7 +66,10 @@ const login = async () => {
       }
     );
   } catch (e) {
-    console.log(e.message);
+    $toast.open({
+      message: e.message,
+      type: "error",
+    });
   }
 };
 </script>

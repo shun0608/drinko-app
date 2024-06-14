@@ -935,6 +935,13 @@
     ufo "^1.5.3"
     unctx "^2.3.1"
 
+"@nuxtjs/toast@^3.3.1":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/toast/-/toast-3.3.1.tgz#ae489f4990b5da9f7ab90ea2dbfcf47900cb3ca2"
+  integrity sha512-b9JpyjSw5ZOyjskBvNc4NEebe0qxB6LivBlO84gHOnsaF23rLkJoBfVNDcXwGNDl7vm09yM4WqBGTkm/OQ0ZCQ==
+  dependencies:
+    vue-toasted "^1.1.28"
+
 "@opentelemetry/api-logs@0.50.0":
   version "0.50.0"
   resolved "https://registry.yarnpkg.com/@opentelemetry/api-logs/-/api-logs-0.50.0.tgz#d46b76daab0bc18fa92dcdabacfc106c380d19a1"
@@ -6560,6 +6567,16 @@ vue-router@^4.3.0, vue-router@^4.3.2:
   integrity sha512-hKQJ1vDAZ5LVkKEnHhmm1f9pMiWIBNGF5AwU67PdH7TyXCj/a4hTccuUuYCAMgJK6rO/NVYtQIEN3yL8CECa7Q==
   dependencies:
     "@vue/devtools-api" "^6.5.1"
+
+vue-toast-notification@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/vue-toast-notification/-/vue-toast-notification-3.1.2.tgz#55106acc4f2c17ecf84468ee9435b97fc7106748"
+  integrity sha512-oNRL/W9aaHoeScp+iTIW7k09vM16/+8aptp2maa+7qTB43JuxmAgKdXKFYtf+uvSNOYYq2BIWgLCeJ61pwom/A==
+
+vue-toasted@^1.1.28:
+  version "1.1.28"
+  resolved "https://registry.yarnpkg.com/vue-toasted/-/vue-toasted-1.1.28.tgz#dbabb83acc89f7a9e8765815e491d79f0dc65c26"
+  integrity sha512-UUzr5LX51UbbiROSGZ49GOgSzFxaMHK6L00JV8fir/CYNJCpIIvNZ5YmS4Qc8Y2+Z/4VVYRpeQL2UO0G800Raw==
 
 vue-virtual-scroller@2.0.0-beta.8:
   version "2.0.0-beta.8"

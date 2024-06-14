@@ -1,5 +1,6 @@
 export default defineNuxtConfig({
-  modules: ['nuxt-sanctum-auth', '@nuxtjs/tailwindcss'],
+  modules: ['nuxt-sanctum-auth',
+            '@nuxtjs/tailwindcss'],
   ssr: false,
   devtools: { enabled: true },
   nuxtSanctumAuth: {
@@ -21,5 +22,5 @@ export default defineNuxtConfig({
       login: "/login",
       logout: "/",
     }
-  }
+  },
 })
