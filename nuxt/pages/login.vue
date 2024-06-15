@@ -59,11 +59,7 @@ const login = async () => {
         password: password.value,
       },
       // optional callback function
-      (data) => {
-        // navigateTo("/", {
-        //   external: true,
-        // });
-        // router.push('/')
+      () => {
         router.push({ path: "/", query: { loggedin: "true" } });
       }
     );

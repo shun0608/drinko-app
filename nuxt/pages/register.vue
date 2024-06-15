@@ -2,10 +2,15 @@
 import { ref } from "vue";
 import { useForm, useField } from "vee-validate";
 import * as yup from "yup";
+
+const { $apiFetch } = useNuxtApp();
+const { $toast } = useNuxtApp();
+const router = useRouter();
+const { $sanctumAuth } = useNuxtApp();
+
 definePageMeta({
   middleware: "guest",
 });
-const { $apiFetch } = useNuxtApp();
 
 const { value: email, errorMessage: emailError } = useField(
   "email",
@@ -26,16 +31,27 @@ const { value: password, errorMessage: passwordError } = useField(
     .min(8, "８文字以上で入力してください")
 );
 
-const responseMessage = ref("");
+const login = async () => {
+  try {
+    await $sanctumAuth.login(
+      {
+        email: email.value,
+        password: password.value,
+      },
+      () => {
+        router.push({ path: "/", query: { registered: "true" } });
+      }
+    );
+  } catch (e) {
+    $toast.open({
+      message: e.message,
+      type: "error",
+    });
+  }
+};
 
 const register = async () => {
   try {
-    // const testpo = JSON.stringify({
-    //   name: name.value,
-    //   email: email.value,
-    //   password: password.value,
-    // });
-    // console.log(testpo);
     const response = await $apiFetch("/api/register", {
       method: "POST",
       headers: {
@@ -47,15 +63,15 @@ const register = async () => {
         password: password.value,
       }),
     });
-    console.log(response);
-    // console.log(response);
-    // if (!response.ok) {
-    //   throw new Error("登録に失敗しました。");
-    // }
-    // const data = await response.json();
-    // console.log("Registration successful", data);
-  } catch (error) {
-    console.error("Error during registration:", error);
+    if (response.created == true) {
+      login();
+    }
+  } catch (e) {
+    $toast.open({
+      message:
+        "登録に失敗しました。お手数ですが、再度ご登録をお願いいたします。",
+      type: "error",
+    });
   }
 };
 </script>

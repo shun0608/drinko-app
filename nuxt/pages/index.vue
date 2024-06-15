@@ -18,6 +18,11 @@ onMounted(() => {
       message: "ログインしました。",
       type: "success",
     });
+  } else if (route.query.registered == "true") {
+    $toast.open({
+      message: "ユーザー登録が完了しました。",
+      type: "success",
+    });
   }
 });
 
