@@ -1,6 +1,6 @@
 <template>
   <div class="bg-drink relative flex justify-center items-center">
-    <div class="bg-white w-full max-w-3xl rounded-3xl px-4 py-6">
+    <div class="bg-white w-full max-w-3xl rounded-3xl px-4 py-6 my-10">
       <h1 class="text-4xl font-bold text-center mt-14">ログイン</h1>
       <form>
         <label class="form-control w-full max-w-lg mx-auto mt-10">

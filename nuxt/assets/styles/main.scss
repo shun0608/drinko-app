@@ -10,5 +10,6 @@ body {
   background-color: rgba(#ffffff, 0.35);
   background-blend-mode: overlay;
   background-size: cover;
-  height: calc(100dvh - 72px);
+  min-height: calc(100dvh - 72px);
+  height: fit-content;
 }

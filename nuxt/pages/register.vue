@@ -1,3 +1,32 @@
+<template>
+  <div>
+    <form>
+      <dl>
+        <dt>メールアドレス</dt>
+        <dd><input v-model="email" type="string" /></dd>
+        <dd>
+          <p>{{ emailError }}</p>
+        </dd>
+      </dl>
+      <dl>
+        <dt>ニックネーム</dt>
+        <dd><input v-model="name" type="string" name="name" /></dd>
+        <dd>
+          <p>{{ nameError }}</p>
+        </dd>
+      </dl>
+      <dl>
+        <dt>パスワード</dt>
+        <dd><input v-model="password" type="password" /></dd>
+        <dd>
+          <p>{{ passwordError }}</p>
+        </dd>
+      </dl>
+      <button class="btn" type="button" @click="register">登録</button>
+    </form>
+  </div>
+</template>
+
 <script setup>
 import { ref } from "vue";
 import { useForm, useField } from "vee-validate";
@@ -75,32 +104,3 @@ const register = async () => {
   }
 };
 </script>
-
-<template>
-  <div>
-    <form>
-      <dl>
-        <dt>メールアドレス</dt>
-        <dd><input v-model="email" type="string" /></dd>
-        <dd>
-          <p>{{ emailError }}</p>
-        </dd>
-      </dl>
-      <dl>
-        <dt>ニックネーム</dt>
-        <dd><input v-model="name" type="string" name="name" /></dd>
-        <dd>
-          <p>{{ nameError }}</p>
-        </dd>
-      </dl>
-      <dl>
-        <dt>パスワード</dt>
-        <dd><input v-model="password" type="password" /></dd>
-        <dd>
-          <p>{{ passwordError }}</p>
-        </dd>
-      </dl>
-      <button class="btn" type="button" @click="register">登録</button>
-    </form>
-  </div>
-</template>
