@@ -1,4 +1,18 @@
-<script setup lang="ts">
+<script setup>
+import { onMounted } from "vue";
+const { $sanctumAuth } = useNuxtApp();
+const auth = useAuth();
+const loading = ref(true);
+
+onMounted(async () => {
+  try {
+    await $sanctumAuth.getUser();
+    loading.value = false;
+  } catch (e) {
+    // console.eroor("Failed to get user:", e);
+  }
+});
+
 useHead({
   htmlAttrs: {
     lang: "ja",
@@ -17,6 +31,13 @@ useHead({
     {
       rel: "stylesheet",
       href: "https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap",
+    },
+    {
+      rel: "stylesheet",
+      href: "https://use.fontawesome.com/releases/v5.15.4/css/all.css",
+      integrity:
+        "sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm",
+      crossorigin: "anonymous",
     },
   ],
 });
@@ -53,16 +74,9 @@ useSeoMeta({
 
 <template>
   <header class="bg-white drop-shadow">
-    <!-- <div class="main-container">
-      <div class="header-left">
-        <h1 class="text-3xl text-black font-bold">Drinko</h1>
-
-      </div>
-      <div class="header-right"></div>
-    </div> -->
-    <div class="navbar">
+    <div class="navbar max-w-screen-lg mx-auto">
       <div class="flex-1">
-        <a class="btn btn-ghost text-xl" href="/">Drinko</a>
+        <a class="text-2xl font-bold p-3" href="/">Drinko</a>
         <form>
           <div class="flex">
             <div class="relative w-full">
@@ -97,7 +111,56 @@ useSeoMeta({
           </div>
         </form>
       </div>
-      <div class="flex-none gap-2">
+      <!-- ログインしていないとき -->
+      <div v-if="!auth.loggedIn">
+        <div class="flex-none gap-2 hidden md:flex">
+          <a class="btn btn-neutral" href="/login">ログイン</a>
+          <a class="btn" href="/register">新規登録</a>
+        </div>
+        <div class="drawer drawer-end">
+          <input id="header-drawer" type="checkbox" class="drawer-toggle" />
+          <div class="drawer-content">
+            <label
+              for="header-drawer"
+              class="btn btn-square btn-ghost md:hidden hover:bg-gray-300"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                class="inline-block w-6 h-6 stroke-current"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                ></path>
+              </svg>
+            </label>
+          </div>
+          <div class="drawer-side">
+            <label
+              for="header-drawer"
+              aria-label="close sidebar"
+              class="drawer-overlay"
+            ></label>
+            <div></div>
+            <ul
+              class="menu p-4 w-80 min-h-full bg-base-200 text-base-content gap-2"
+            >
+              <!-- Sidebar content here -->
+              <li class="">
+                <a class="btn btn-neutral" href="/login">ログイン</a>
+              </li>
+              <li><a class="btn btn-outline" href="/register">新規登録</a></li>
+              <li><a>Sidebar Item 1</a></li>
+              <li><a>Sidebar Item 2</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="auth.loggedIn" class="flex-none gap-2">
         <div class="dropdown dropdown-end">
           <div
             tabindex="0"
@@ -131,5 +194,17 @@ useSeoMeta({
   <main class="bg-white">
     <slot />
   </main>
-  <footer></footer>
+
+  <footer class="footer items-center p-4 bg-neutral text-neutral-content">
+    <div
+      class="w-full max-w-screen-lg mx-auto flex justify-between items-center"
+    >
+      <aside class="items-center pl-3">
+        <p>Copyright © 2024 - All right reserved by @shun0608</p>
+      </aside>
+      <a class="p-2" href="https://github.com/shun0608/drinko-app"
+        ><i class="fab fa-github-square text-xl"></i
+      ></a>
+    </div>
+  </footer>
 </template>
