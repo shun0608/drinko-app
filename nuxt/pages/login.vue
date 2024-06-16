@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-drink relative flex justify-center items-center">
-    <div class="bg-white w-full max-w-3xl rounded-3xl px-4 py-6 my-10">
-      <h1 class="text-4xl font-bold text-center mt-14">ログイン</h1>
+  <AuthWhiteBack>
+    <template #form-title>ログイン</template>
+    <template #content>
       <form>
         <label class="form-control w-full max-w-lg mx-auto mt-10">
           <div class="label">
@@ -42,12 +42,10 @@
         <NuxtLink role="button" class="btn max-w-lg mt-3" href="/register"
           >新規登録（無料）</NuxtLink
         >
-        <NuxtLink role="button" class="btn btn-link text-black mt-5" href="/"
-          >トップへ戻る</NuxtLink
-        >
+        <back-to-top-link />
       </div>
-    </div>
-  </div>
+    </template>
+  </AuthWhiteBack>
 </template>
 
 <script setup>
@@ -84,7 +82,12 @@ const login = async () => {
       },
       // optional callback function
       () => {
-        router.push({ path: "/", query: { loggedin: "true" } });
+        // router.push({ path: "/", query: { loggedin: "true" } });
+        navigateTo({
+          external: true,
+          path: "/",
+          query: { loggedin: "true" },
+        });
       }
     );
   } catch (e) {

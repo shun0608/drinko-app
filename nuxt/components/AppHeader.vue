@@ -18,15 +18,6 @@ onMounted(async () => {
     await $sanctumAuth.getUser();
     loading.value = false;
   } catch (e) {
-    // console.eroor("Failed to get user:", e);
-  }
-});
-
-onMounted(async () => {
-  try {
-    await $sanctumAuth.getUser();
-    loading.value = false;
-  } catch (e) {
     console.e("Failed to get user:", error);
   }
 });

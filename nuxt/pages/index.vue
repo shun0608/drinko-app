@@ -12,6 +12,7 @@ const showToast = (message, type) => {
 onMounted(() => {
   if (route.query.loggedin === "true") {
     showToast("ログインしました。", "success");
+    reloadNuxtApp();
   } else if (route.query.registered === "true") {
     showToast("ユーザー登録が完了しました。", "success");
   } else if (route.query.loggedout === "true") {
