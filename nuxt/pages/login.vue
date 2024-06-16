@@ -1,27 +1,51 @@
 <template>
-  <div>
-    <div>
+  <div class="bg-drink relative flex justify-center items-center">
+    <div class="bg-white w-full max-w-3xl rounded-3xl px-4 py-6">
+      <h1 class="text-4xl font-bold text-center mt-14">ログイン</h1>
       <form>
-        <dl>
-          <dt>メールアドレス</dt>
-          <dd>
-            <input id="email" type="string" v-model="email" />
-          </dd>
-          <dd>
-            <p>{{ emailError }}</p>
-          </dd>
-        </dl>
-        <dl>
-          <dt>
-            <label for="password">パスワード</label>
-          </dt>
-          <dd><input id="password" type="password" v-model="password" /></dd>
-          <dd>
-            <p>{{ passwordError }}</p>
-          </dd>
-        </dl>
-        <button type="button" @click="login">ログイン</button>
+        <label class="form-control w-full max-w-lg mx-auto mt-10">
+          <div class="label">
+            <span class="label-text">メールアドレス</span>
+          </div>
+          <input
+            id="email"
+            type="string"
+            v-model="email"
+            class="input input-bordered w-full max-w-lg"
+          />
+          <p>{{ emailError }}</p>
+        </label>
+        <label class="form-control w-full max-w-lg mx-auto mt-4">
+          <div class="label">
+            <span class="label-text">パスワード</span>
+          </div>
+          <input
+            id="password"
+            type="string"
+            v-model="password"
+            class="input input-bordered w-full max-w-lg"
+          />
+          <p>{{ passwordError }}</p>
+        </label>
+        <label class="form-control mt-10">
+          <button
+            type="button"
+            @click="login"
+            class="btn btn-neutral w-full max-w-lg mx-auto"
+          >
+            ログイン
+          </button>
+        </label>
       </form>
+      <div class="flex flex-col justify-center items-center mt-6">
+        <p class="font-bold">アカウントをお持ちで無い方</p>
+        <NuxtLink role="button" class="btn max-w-lg mt-3" href="/register"
+          >新規登録（無料）</NuxtLink
+        >
+        <NuxtLink role="button" class="btn btn-link text-black mt-5" href="/"
+          >トップへ戻る</NuxtLink
+        >
+      </div>
     </div>
   </div>
 </template>
@@ -64,12 +88,18 @@ const login = async () => {
       }
     );
   } catch (e) {
-    $toast.open({
-      message: e.message,
-      type: "error",
-    });
+    if (e.message) {
+      $toast.open({
+        message: e.message,
+        type: "error",
+      });
+    } else {
+      $toast.open({
+        message:
+          "ログインできませんでした。メールアドレスまたはパスワードが異なります。",
+        type: "error",
+      });
+    }
   }
 };
 </script>
-
-<style scoped></style>

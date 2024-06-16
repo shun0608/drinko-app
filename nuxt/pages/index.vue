@@ -49,61 +49,6 @@ onMounted(() => {
         そんな願いを込めてつくりました。
       </p>
     </div>
-    <!-- <div class="absolute bottom-0 inset-x-2/4">
-      <div class="relative">
-        <span class="block h-10 w-0.5 bg-white"></span>
-        <span
-          class="block h-2 w-2 bg-white rounded-full absolute top-0 inset-x-0"
-        ></span>
-      </div>
-      <div>scroll</div>
-    </div> -->
-    <!-- <a href="/login" class="btn">ログイン</a>
-    <button class="btn" @click="logout">ログアウト</button> -->
-    <!-- <div class="relative">
-      <div
-        class="absolute inset-0 z-10 flex flex-col items-center justify-center"
-      >
-        <h1 class="text-black">Drinko</h1>
-        <p class="text-black">
-          説明説明説明説明説明説明説明説明説明説明説明説明
-        </p>
-        <a href="#" class="btn">ジュース検索</a>
-        <div>
-          <p class="text-black">こんにちはさん</p>
-          <button class="btn" @click="logout">ログアウト</button>
-        </div>
-      </div>
-      <div class="relative">
-        <span class="block w-full h-dvh bg-white opacity-50 absolute"></span>
-        <img
-          src="~/assets/img/keyvisual-pc.jpg"
-          alt="キービジュアル"
-          class="w-full h-dvh object-cover"
-        />
-      </div>
-    </div>
-    <div class="relative">
-      <div
-        class="absolute inset-0 z-10 flex flex-col items-center justify-center"
-      >
-        <h1 class="text-black">Drinko</h1>
-        <p class="text-black">
-          説明説明説明説明説明説明説明説明説明説明説明説明
-        </p>
-        <a href="/login" class="btn">ログイン</a>
-        <a href="#" class="btn">新規登録</a>
-        <a href="#" class="btn">ジュース検索</a>
-      </div>
-      <div class="relative">
-        <span class="block w-full h-dvh bg-white opacity-50 absolute"></span>
-        <img
-          src="~/assets/img/keyvisual-pc.jpg"
-          alt="キービジュアル"
-          class="w-full h-dvh object-cover"
-        />
-      </div>
-    </div> -->
   </div>
   <section class="my-28 px-4">
     <h2 class="text-7xl font-black text-center">Search</h2>
