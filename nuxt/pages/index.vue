@@ -5,34 +5,41 @@ const { $sanctumAuth } = useNuxtApp();
 const loading = ref(true);
 const auth = useAuth();
 const route = useRoute();
+const router = useRouter();
 const { $toast } = useNuxtApp();
 
+const showSuccessToast = (message) => {
+  $toast.open({
+    message,
+    type: "success",
+  });
+};
+
 onMounted(async () => {
-  await $sanctumAuth.getUser();
-  loading.value = false;
+  try {
+    await $sanctumAuth.getUser();
+    loading.value = false;
+  } catch (e) {
+    console.e("Failed to get user:", error);
+  }
 });
 
 onMounted(() => {
-  if (route.query.loggedin == "true") {
-    $toast.open({
-      message: "ログインしました。",
-      type: "success",
-    });
-  } else if (route.query.registered == "true") {
-    $toast.open({
-      message: "ユーザー登録が完了しました。",
-      type: "success",
-    });
+  if (route.query.loggedin === "true") {
+    showSuccessToast("ログインしました。");
+  } else if (route.query.registered === "true") {
+    showSuccessToast("ユーザー登録が完了しました。");
+  } else if (route.query.loggedout === "true") {
+    showSuccessToast("ログアウトしました。");
   }
 });
 
 const logout = async () => {
-  await $sanctumAuth.logout();
-  (data) => {
-    navigateTo("/", {
-      external: true,
-    });
-  };
+  await $sanctumAuth.logout((data) => {
+    console.log(data.message);
+    router.push({ path: "/", query: { loggedout: "true" } });
+    showSuccessToast("ログアウトしました。");
+  });
 };
 </script>
 
