@@ -1,4 +1,5 @@
 <template>
+  <div class="bg-drink relative flex justify-center items-center"></div>
   <div>
     <form>
       <dl>

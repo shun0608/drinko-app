@@ -13,7 +13,7 @@
             v-model="email"
             class="input input-bordered w-full max-w-lg"
           />
-          <p>{{ emailError }}</p>
+          <p class="text-error mt-2">{{ emailError }}</p>
         </label>
         <label class="form-control w-full max-w-lg mx-auto mt-4">
           <div class="label">
@@ -21,21 +21,21 @@
           </div>
           <input
             id="password"
-            type="string"
+            type="password"
             v-model="password"
             class="input input-bordered w-full max-w-lg"
           />
-          <p>{{ passwordError }}</p>
+          <p class="text-error mt-2">{{ passwordError }}</p>
         </label>
-        <label class="form-control mt-10">
+        <div class="flex justify-center mt-10">
           <button
             type="button"
             @click="login"
-            class="btn btn-neutral w-full max-w-lg mx-auto"
+            class="btn btn-block btn-neutral max-w-lg"
           >
             ログイン
           </button>
-        </label>
+        </div>
       </form>
       <div class="flex flex-col justify-center items-center mt-6">
         <p class="font-bold">アカウントをお持ちで無い方</p>
