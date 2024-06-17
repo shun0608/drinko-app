@@ -33,12 +33,12 @@ class UserRequest extends FormRequest
     ];
   }
 
-  protected function failedValidation(Validator $validator)
-  {
-    $res = response()->json([
-      'status' => 400,
-      'errors' => $validator->errors(),
-    ], 400);
-    throw new HttpResponseException($res);
-  }
+  // protected function failedValidation(Validator $validator)
+  // {
+  //   $res = response()->json([
+  //     'status' => 400,
+  //     'errors' => $validator->errors(),
+  //   ], 400);
+  //   throw new HttpResponseException($res);
+  // }
 }

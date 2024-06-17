@@ -24,7 +24,7 @@ onMounted(async () => {
 
 const logout = async () => {
   await $sanctumAuth.logout((data) => {
-    console.log(data.message);
+    // location.href = "/" + "?loggedout=true";
     router.push({ path: "/", query: { loggedout: "true" } });
     showToast("ログアウトしました。");
   });
@@ -35,7 +35,7 @@ const logout = async () => {
   <header class="bg-white drop-shadow z-10 sticky top-0">
     <div class="navbar max-w-screen-lg mx-auto">
       <div class="flex-1">
-        <a class="text-2xl font-bold p-3" href="/">Drinko</a>
+        <NuxtLink class="text-2xl font-bold p-3" href="/">Drinko</NuxtLink>
         <form>
           <div class="flex">
             <div class="relative w-full">
@@ -73,8 +73,8 @@ const logout = async () => {
       <!-- ログインしていないとき -->
       <div v-if="!auth.loggedIn">
         <div class="flex-none gap-2 hidden md:flex">
-          <a class="btn btn-neutral" href="/login">ログイン</a>
-          <a class="btn" href="/register">新規登録</a>
+          <NuxtLink class="btn btn-neutral" href="/login">ログイン</NuxtLink>
+          <NuxtLink class="btn" href="/register">新規登録</NuxtLink>
         </div>
         <div class="drawer drawer-end">
           <input id="header-drawer" type="checkbox" class="drawer-toggle" />
@@ -110,11 +110,17 @@ const logout = async () => {
             >
               <!-- Sidebar content here -->
               <li class="">
-                <a class="btn btn-neutral" href="/login">ログイン</a>
+                <NuxtLink class="btn btn-neutral" href="/login"
+                  >ログイン</NuxtLink
+                >
               </li>
-              <li><a class="btn btn-outline" href="/register">新規登録</a></li>
-              <li><a>Sidebar Item 1</a></li>
-              <li><a>Sidebar Item 2</a></li>
+              <li>
+                <NuxtLink class="btn btn-outline" href="/register"
+                  >新規登録</NuxtLink
+                >
+              </li>
+              <li><NuxtLink>Sidebar Item 1</NuxtLink></li>
+              <li><NuxtLink>Sidebar Item 2</NuxtLink></li>
             </ul>
           </div>
         </div>
@@ -141,12 +147,12 @@ const logout = async () => {
               <button class="btn btn-ghost" @click="logout">ログアウト</button>
             </li>
             <li>
-              <a class="justify-between">
+              <NuxtLink class="justify-between">
                 Profile
                 <span class="badge">New</span>
-              </a>
+              </NuxtLink>
             </li>
-            <li><a>Logout</a></li>
+            <li><NuxtLink>Logout</NuxtLink></li>
           </ul>
         </div>
       </div>

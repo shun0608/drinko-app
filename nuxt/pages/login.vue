@@ -80,14 +80,8 @@ const login = async () => {
         email: email.value,
         password: password.value,
       },
-      // optional callback function
       () => {
-        // router.push({ path: "/", query: { loggedin: "true" } });
-        navigateTo({
-          external: true,
-          path: "/",
-          query: { loggedin: "true" },
-        });
+        location.href = "/" + "?loggedin=true";
       }
     );
   } catch (e) {

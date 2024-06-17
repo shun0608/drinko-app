@@ -63,32 +63,6 @@
       </form>
     </template>
   </AuthWhiteBack>
-  <div>
-    <form>
-      <dl>
-        <dt>メールアドレス</dt>
-        <dd><input v-model="email" type="string" /></dd>
-        <dd>
-          <p>{{ emailError }}</p>
-        </dd>
-      </dl>
-      <dl>
-        <dt>ニックネーム</dt>
-        <dd><input v-model="name" type="string" name="name" /></dd>
-        <dd>
-          <p>{{ nameError }}</p>
-        </dd>
-      </dl>
-      <dl>
-        <dt>パスワード</dt>
-        <dd><input v-model="password" type="password" /></dd>
-        <dd>
-          <p>{{ passwordError }}</p>
-        </dd>
-      </dl>
-      <button class="btn" type="button" @click="register">登録</button>
-    </form>
-  </div>
 </template>
 
 <script setup>
@@ -124,6 +98,13 @@ const { value: password, errorMessage: passwordError } = useField(
     .min(8, "８文字以上で入力してください")
 );
 
+const showToast = (message, type) => {
+  $toast.open({
+    message,
+    type: type,
+  });
+};
+
 const login = async () => {
   try {
     await $sanctumAuth.login(
@@ -132,14 +113,18 @@ const login = async () => {
         password: password.value,
       },
       () => {
-        router.push({ path: "/", query: { registered: "true" } });
+        location.href = "/" + "?registered=true";
       }
     );
   } catch (e) {
-    $toast.open({
-      message: e.message,
-      type: "error",
-    });
+    if (e.message) {
+      showToast(e.message, "error");
+    } else {
+      showToast(
+        "ログインできませんでした。再度ログインをお試しください。",
+        "error"
+      );
+    }
   }
 };
 
@@ -160,11 +145,14 @@ const register = async () => {
       login();
     }
   } catch (e) {
-    $toast.open({
-      message:
+    if (e.response._data.message) {
+      showToast(e.response._data.message, "error");
+    } else {
+      showToast(
         "登録に失敗しました。お手数ですが、再度ご登録をお願いいたします。",
-      type: "error",
-    });
+        "error"
+      );
+    }
   }
 };
 </script>

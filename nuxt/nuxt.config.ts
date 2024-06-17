@@ -4,15 +4,6 @@ export default defineNuxtConfig({
   ssr: false,
   devtools: { enabled: true },
   css: ['~/assets/styles/main.scss'],
-  // vite: {
-  //   css: {
-  //     preprocessorOptions: {
-  //       scss: {
-  //         additionalData: '@use "~/assets/styles/main.scss" as *;'
-  //       }
-  //     }
-  //   }
-  // },
   nuxtSanctumAuth: {
     token: false,
     baseUrl: "http://localhost:8000",
