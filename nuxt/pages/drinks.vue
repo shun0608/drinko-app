@@ -1,5 +1,42 @@
+<script setup>
+const currentPage = new URL(location.href).searchParams.get("page");
+const page = ref(currentPage ? parseInt(currentPage) : 1);
+
+const { data } = await useFetch(() => `/api/drinks?page=${page.value}`, {
+  baseURL: "http://localhost:8000",
+});
+const drinkPaginator = data.value;
+
+watch(page, () => {
+  location.href = "/drinks?page=" + page.value;
+});
+
+const links = useBreadcrumbItems({
+  overrides: [
+    {
+      label: "ホーム",
+    },
+    {
+      label: "ドリンク一覧",
+    },
+  ],
+});
+</script>
+
 <template>
-  <div class="mx-auto max-w-screen-lg mt-24">
+  <div class="max-w-screen-lg mx-auto mt-8">
+    <UBreadcrumb
+      :links="links"
+      :ui="{
+        wrapper: 'mx-4',
+        li: 'text-primary dark:text-primary',
+        active: 'text-primary dark:text-primary-400',
+        inactive: 'hover:text-gray-700 dark:hover:text-gray-200',
+      }"
+    />
+  </div>
+
+  <div class="mx-auto max-w-screen-lg mt-10">
     <div
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-3"
     >
@@ -36,17 +73,3 @@
     }"
   />
 </template>
-
-<script setup>
-const currentPage = new URL(location.href).searchParams.get("page");
-const page = ref(currentPage ? parseInt(currentPage) : 1);
-
-const { data } = await useFetch(() => `/api/drinks?page=${page.value}`, {
-  baseURL: "http://localhost:8000",
-});
-const drinkPaginator = data.value;
-
-watch(page, () => {
-  location.href = "/drinks?page=" + page.value;
-});
-</script>
