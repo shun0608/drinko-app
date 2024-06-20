@@ -18,7 +18,7 @@
       </div>
     </div>
   </div> -->
-  <div class="mx-auto max-w-screen-lg">
+  <div class="mx-auto max-w-screen-lg mt-24">
     <div
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-3"
     >
@@ -50,6 +50,9 @@
     :to="(page: number) => ({
       query: { page }
     })"
+    :ui="{
+      wrapper: 'justify-center mt-24 mb-48 scale-125 sm:scale-150',
+    }"
   />
 </template>
 
