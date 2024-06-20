@@ -12,8 +12,8 @@ class DrinkController extends Controller
    */
   public function index()
   {
-    $drinks = Drink::all();
-    return response()->json(compact('drinks'), 200);
+    $drinks = Drink::paginate(12)->withPath('/drinks');
+    return $drinks;
   }
 
   /**

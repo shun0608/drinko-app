@@ -5,7 +5,13 @@ export default {
     "./pages/**/*.{vue,js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      aspectRatio: {
+        auto: "auto",
+        square: "1 / 1",
+        video: "16 / 9",
+      },
+    },
   },
   plugins: [require("daisyui")],
   daisyui: {
