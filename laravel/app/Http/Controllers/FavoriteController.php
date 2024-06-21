@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Drink;
+use App\Models\Favorite;
 
 class FavoriteController extends Controller
 {
@@ -25,8 +28,13 @@ class FavoriteController extends Controller
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request, Drink $drink)
+  public function store($userId, $drinkId)
   {
+    $favorite = new Favorite;
+    $favorite->user_id = $userId;
+    $favorite->drink_id = $drinkId;
+    $favorite->save();
+    return response()->json(['message' => 'お気に入りに登録されました。'], 201);
   }
 
   /**
@@ -56,7 +64,30 @@ class FavoriteController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(string $id)
+  public function destroy($userId, $drinkId)
   {
+    Favorite::where('user_id', $userId)->where('drink_id', $drinkId)->delete();
+    return response()->json(['message' => 'お気に入りから削除されました'], 200);
+  }
+
+  public function isFavorite($userId = null, $drinkId)
+  {
+    $userId =  $userId ?? Auth::id();
+    return Favorite::where('user_id', $userId)->where('drink_id', $drinkId)->exists();
+  }
+
+  public function toggleFavorite($drinkId)
+  {
+    $user = Auth::user();
+    if (isset($user)) {
+      $userId = $user->id;
+      if ($this->isFavorite($userId, $drinkId)) {
+        return $this->destroy($userId, $drinkId);
+      } else if (!($this->isFavorite($userId, $drinkId))) {
+        return $this->store($userId, $drinkId);
+      }
+    } else {
+      return response()->json(['error' => 'Unauthorized'], 401);
+    }
   }
 }

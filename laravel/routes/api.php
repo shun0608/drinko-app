@@ -24,8 +24,7 @@ Route::middleware('auth:sanctum')->group(function () {
     \Log::info($user);
     return $user;
   });
-  Route::post('/favorite/{drinkId}', [FavoriteController::class, 'store']);
-  Route::delete('/unfavorite/{drinkId}', [FavoriteController::class, 'destroy']);
+  Route::post('/favorite/{drinkId}', [FavoriteController::class, 'toggleFavorite']);
 });
 
 Route::post('/register', [UsersController::class, 'store']);

@@ -37,7 +37,7 @@ const links = useBreadcrumbItems({
 
 const apiTest = async () => {
   try {
-    const response = await $apiFetch(`api/drinks/1/favorite`, {
+    const response = await $apiFetch(`api/favorite/${urlPathId}/`, {
       method: "POST",
       baseURL: "http://localhost:8000",
     });
