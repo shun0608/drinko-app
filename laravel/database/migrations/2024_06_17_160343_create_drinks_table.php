@@ -13,7 +13,7 @@ return new class extends Migration
   {
     Schema::create('drinks', function (Blueprint $table) {
       $table->id();
-      $table->integer('drink_id');
+      $table->integer('cocktailDB_id');
       $table->string('name_en')->nullable();
       $table->string('name_ja')->nullable();
       for ($i = 1; $i <= 15; $i++) {

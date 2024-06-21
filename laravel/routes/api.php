@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\DrinkController;
+use App\Http\Controllers\FavoriteController;
 use App\Models\User;
 
 Route::controller(AuthController::class)->group(function () {
@@ -17,10 +18,14 @@ Route::controller(DrinkController::class)->group(function () {
   Route::get('/drinks/{id}', 'show');
 });
 
-Route::get('/user', function (Request $request) {
-  $user = $request->user();
-  \Log::info($user);
-  return $user;
-})->middleware('auth:sanctum');
+Route::middleware('auth:sanctum')->group(function () {
+  Route::get('/user', function (Request $request) {
+    $user = $request->user();
+    \Log::info($user);
+    return $user;
+  });
+  Route::post('/favorite/{drinkId}', [FavoriteController::class, 'store']);
+  Route::delete('/unfavorite/{drinkId}', [FavoriteController::class, 'destroy']);
+});
 
 Route::post('/register', [UsersController::class, 'store']);

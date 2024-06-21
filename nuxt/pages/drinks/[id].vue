@@ -1,5 +1,6 @@
 <script setup>
 import DrinkCard from "../components/DrinkCard.vue";
+const { $apiFetch } = useNuxtApp();
 
 const urlPathId = location.pathname.split("/")[2];
 const { data } = await useFetch(() => `/api/drinks/${urlPathId}`, {
@@ -33,6 +34,18 @@ const links = useBreadcrumbItems({
     },
   ],
 });
+
+const apiTest = async () => {
+  try {
+    const response = await $apiFetch(`api/drinks/1/favorite`, {
+      method: "POST",
+      baseURL: "http://localhost:8000",
+    });
+    console.log(response);
+  } catch (e) {
+    console.log(e.response);
+  }
+};
 </script>
 
 <template>
@@ -76,6 +89,7 @@ const links = useBreadcrumbItems({
           class="text-white"
         />
       </div>
+      <button class="btn" @click="apiTest()">APIテスト</button>
     </div>
   </div>
   <h5>おすすめ</h5>

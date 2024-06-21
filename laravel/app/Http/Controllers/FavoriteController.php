@@ -3,18 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Drink;
-use Illuminate\Support\Facades\Auth;
 
-class DrinkController extends Controller
+class FavoriteController extends Controller
 {
   /**
    * Display a listing of the resource.
    */
   public function index()
   {
-    $drinks = Drink::paginate(12)->withPath('/drinks');
-    return $drinks;
+    //
   }
 
   /**
@@ -28,25 +25,16 @@ class DrinkController extends Controller
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function store(Request $request, Drink $drink)
   {
   }
 
   /**
    * Display the specified resource.
    */
-  public function show($id)
+  public function show(string $id)
   {
-    $drink = Drink::find($id);
-    if (!$drink) {
-      return response()->json(['message' => 'お探しのドリンクは存在しません'], 404);
-    }
-    $recommendedDrinks = Drink::where('id', '!=', $id)->inRandomOrder()->take(3)->get();
-
-    return response()->json([
-      'drink' => $drink,
-      'recommended' => $recommendedDrinks
-    ]);
+    //
   }
 
   /**
@@ -70,6 +58,5 @@ class DrinkController extends Controller
    */
   public function destroy(string $id)
   {
-    //
   }
 }
