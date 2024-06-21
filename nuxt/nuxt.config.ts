@@ -1,5 +1,10 @@
 export default defineNuxtConfig({
-  modules: ['nuxt-sanctum-auth', "@nuxt/ui", "@nuxtjs/seo"],
+  modules: [
+    'nuxt-sanctum-auth',
+    "@nuxt/ui",
+    "@nuxtjs/seo",
+    "@stefanobartoletti/nuxt-social-share"
+  ],
   ssr: false,
   devtools: { enabled: true },
   css: ['~/assets/styles/main.scss'],

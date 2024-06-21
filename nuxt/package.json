@@ -15,6 +15,7 @@
     "@nuxtjs/proxy": "^2.1.0",
     "@nuxtjs/seo": "^2.0.0-rc.10",
     "@nuxtjs/toast": "^3.3.1",
+    "@stefanobartoletti/nuxt-social-share": "^0.7.0",
     "daisyui": "^4.12.2",
     "nuxt": "^3.11.2",
     "nuxt-auth-sanctum": "^0.3.14",

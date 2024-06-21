@@ -1967,6 +1967,14 @@
   resolved "https://registry.yarnpkg.com/@sphinxxxx/color-conversion/-/color-conversion-2.2.2.tgz#03ecc29279e3c0c832f6185a5bfa3497858ac8ca"
   integrity sha512-XExJS3cLqgrmNBIP3bBw6+1oQ1ksGjFh0+oClDKFYpCCqx/hlqwWO5KO/S63fzUo67SxI9dMrF0y5T/Ey7h8Zw==
 
+"@stefanobartoletti/nuxt-social-share@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@stefanobartoletti/nuxt-social-share/-/nuxt-social-share-0.7.0.tgz#82279321914fd2005a451b52bf54707bba2296ea"
+  integrity sha512-k2Xrx7OawmVFhwnoZVvEbMcpuV/GAxE33ZAUlVDBDiu8//PlYt7G/Y7BOvrAeN10Sba+Ra/R1iCz9bhH6x6lNA==
+  dependencies:
+    "@nuxt/kit" "^3.11.2"
+    defu "^6.1.4"
+
 "@tailwindcss/aspect-ratio@^0.4.2":
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/@tailwindcss/aspect-ratio/-/aspect-ratio-0.4.2.tgz#9ffd52fee8e3c8b20623ff0dcb29e5c21fb0a9ba"

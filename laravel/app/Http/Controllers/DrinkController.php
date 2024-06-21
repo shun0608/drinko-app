@@ -40,7 +40,12 @@ class DrinkController extends Controller
     if (!$drink) {
       return response()->json(['message' => 'お探しのドリンクは存在しません'], 404);
     }
-    return response()->json($drink);
+    $recommendedDrinks = Drink::where('id', '!=', $id)->inRandomOrder()->take(3)->get();
+
+    return response()->json([
+      'drink' => $drink,
+      'recommended' => $recommendedDrinks
+    ]);
   }
 
   /**

@@ -1,4 +1,6 @@
 <script setup>
+import DrinkCard from "../components/DrinkCard.vue";
+
 const currentPage = new URL(location.href).searchParams.get("page");
 const page = ref(currentPage ? parseInt(currentPage) : 1);
 
@@ -6,6 +8,7 @@ const { data } = await useFetch(() => `/api/drinks?page=${page.value}`, {
   baseURL: "http://localhost:8000",
 });
 const drinkPaginator = data.value;
+const drinks = drinkPaginator.data;
 
 watch(page, () => {
   location.href = "/drinks?page=" + page.value;
@@ -40,23 +43,8 @@ const links = useBreadcrumbItems({
     <div
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-3"
     >
-      <div v-for="drink in drinkPaginator.data" :key="drink">
-        <NuxtLink class="h-full block">
-          <!-- <NuxtLink class="h-full block" :href="`/drinks/${drink.id}`"> -->
-          <div class="card card-compact bg-base-100 shadow-xl h-full">
-            <figure>
-              <img
-                :src="drink.image_url"
-                alt="Shoes"
-                class="aspect-square object-cover"
-              />
-            </figure>
-            <div class="card-body">
-              <h2 class="card-title">{{ drink.name_en }}</h2>
-              <p>{{ drink.name_ja }}</p>
-            </div>
-          </div>
-        </NuxtLink>
+      <div v-for="drink in drinks" :key="drink.id">
+        <DrinkCard :drink="drink" />
       </div>
     </div>
   </div>
