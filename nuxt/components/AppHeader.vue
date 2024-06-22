@@ -5,6 +5,7 @@ const auth = useAuth();
 const router = useRouter();
 const loading = ref(true);
 const { $toast } = useNuxtApp();
+console.log(auth);
 
 const showToast = (message, type) => {
   $toast.open({
@@ -119,8 +120,6 @@ const logout = async () => {
                   >新規登録</NuxtLink
                 >
               </li>
-              <li><NuxtLink>Sidebar Item 1</NuxtLink></li>
-              <li><NuxtLink>Sidebar Item 2</NuxtLink></li>
             </ul>
           </div>
         </div>
@@ -144,15 +143,13 @@ const logout = async () => {
             class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
           >
             <li>
-              <button class="btn btn-ghost" @click="logout">ログアウト</button>
-            </li>
-            <li>
-              <NuxtLink class="justify-between">
-                Profile
-                <span class="badge">New</span>
+              <NuxtLink class="py-2" :to="`/mypage/${auth.user.id}`">
+                お気に入りドリンク
               </NuxtLink>
             </li>
-            <li><NuxtLink>Logout</NuxtLink></li>
+            <li>
+              <NuxtLink class="py-2" @click="logout()">ログアウト</NuxtLink>
+            </li>
           </ul>
         </div>
       </div>
