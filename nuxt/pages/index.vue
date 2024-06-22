@@ -20,22 +20,7 @@ const { data } = await useFetch(() => `/api/recommend`, {
   method: "GET",
   baseURL: "http://localhost:8000",
 });
-console.log(data);
 const drinks = data.value;
-
-// const { $sanctumAuth } = useNuxtApp();
-// const loading = ref(true);
-// const auth = useAuth();
-// const router = useRouter();
-
-// onMounted(async () => {
-//   try {
-//     await $sanctumAuth.getUser();
-//     loading.value = false;
-//   } catch (e) {
-//     console.e("Failed to get user:", error);
-//   }
-// });
 </script>
 
 <template>
