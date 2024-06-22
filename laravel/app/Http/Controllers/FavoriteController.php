@@ -17,10 +17,10 @@ class FavoriteController extends Controller
     $user = Auth::user();
     if ($user) {
       $userId = $user->id;
-      $userFavorites = Faborite::where('user_id', $userId)->pluck('drink_id');
+      $userFavorites = Favorite::where('user_id', $userId)->pluck('drink_id');
       if ($userFavorites) {
-        $drinks = Drink::whereIn('id', $userFavorites);
-        return response()->json(compact('drinks', 200));
+        $drinks = Drink::whereIn('id', $userFavorites)->get();
+        return response()->json($drinks);
       } else {
         return response()->json(['error' => 'お気に入りしたドリンクがありません'], 404);
       }

@@ -41,7 +41,6 @@ const updateIsFavoriteStatus = async () => {
   try {
     const response = await $apiFetch(`/api/isFavorite/${urlPathId}`, {
       method: "GET",
-      baseURL: "http://localhost:8000",
     });
     isFavorite.value = response;
   } catch (e) {
