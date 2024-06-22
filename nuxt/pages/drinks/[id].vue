@@ -35,17 +35,33 @@ const links = useBreadcrumbItems({
   ],
 });
 
-const apiTest = async () => {
+const isFavorite = ref(false);
+
+const updateIsFavoriteStatus = async () => {
+  try {
+    const response = await $apiFetch(`/api/isFavorite/${urlPathId}`, {
+      method: "GET",
+      baseURL: "http://localhost:8000",
+    });
+    isFavorite.value = response;
+  } catch (e) {
+    console.error(e.response);
+  }
+};
+
+const updateFavorite = async () => {
   try {
     const response = await $apiFetch(`api/favorite/${urlPathId}/`, {
       method: "POST",
       baseURL: "http://localhost:8000",
     });
-    console.log(response);
+    await updateIsFavoriteStatus(); // isFavorite の状態を更新
   } catch (e) {
-    console.log(e.response);
+    console.error(e.response);
   }
 };
+
+onMounted(updateIsFavoriteStatus);
 </script>
 
 <template>
@@ -88,8 +104,27 @@ const apiTest = async () => {
           :label="true"
           class="text-white"
         />
+        <button
+          :class="['btn', { favorite: isFavorite }]"
+          @click="updateFavorite()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            :fill="isFavorite ? 'white' : 'none'"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+            />
+          </svg>
+          お気に入り
+        </button>
       </div>
-      <button class="btn" @click="apiTest()">APIテスト</button>
     </div>
   </div>
   <h5>おすすめ</h5>
@@ -99,3 +134,10 @@ const apiTest = async () => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.favorite {
+  color: #ffffff;
+  background-color: #ff3333 !important;
+}
+</style>

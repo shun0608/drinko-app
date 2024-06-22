@@ -70,9 +70,12 @@ class FavoriteController extends Controller
     return response()->json(['message' => 'お気に入りから削除されました'], 200);
   }
 
-  public function isFavorite($userId = null, $drinkId)
+  public function isFavorite($drinkId, $userId = null)
   {
     $userId =  $userId ?? Auth::id();
+    if (!$userId) {
+      return response()->json(['error' => 'Unauthorized'], 401);
+    }
     return Favorite::where('user_id', $userId)->where('drink_id', $drinkId)->exists();
   }
 
