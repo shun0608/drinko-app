@@ -75,11 +75,11 @@ onMounted(updateIsFavoriteStatus);
     />
     <div class="mx-4">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-16 mt-5">
-        <figure>
+        <figure class="">
           <img
             :src="drink.image_url"
             :alt="drink.name_en"
-            class="aspect-square object-cover"
+            class="aspect-square object-cover w-full"
           />
         </figure>
         <div>
@@ -93,9 +93,12 @@ onMounted(updateIsFavoriteStatus);
           </ul>
           <h5 class="text-lg mt-5">作り方</h5>
           <p class="mt-1">{{ drink.recipe_ja }}</p>
-          <div class="flex flex-row gap-2 mt-5">
+          <div class="flex flex-row flex-wrap gap-2 mt-5">
             <button
-              :class="['btn rounded-md', { favorite: isFavorite }]"
+              :class="[
+                'btn btn-sm h-10 text-xs rounded-md',
+                { favorite: isFavorite },
+              ]"
               @click="updateFavorite()"
             >
               <svg
@@ -120,7 +123,7 @@ onMounted(updateIsFavoriteStatus);
               :network="network"
               :styled="true"
               :label="true"
-              class="text-white"
+              class="text-white h-10"
             />
           </div>
         </div>
