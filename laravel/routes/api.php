@@ -26,6 +26,8 @@ Route::middleware('auth:sanctum')->group(function () {
   });
   Route::post('/favorite/{drinkId}', [FavoriteController::class, 'toggleFavorite']);
   Route::get('/isFavorite/{drinkId}', [FavoriteController::class, 'isFavorite']);
+
+  Route::get('/mypage/{userId}', [FavoriteController::class, 'index']);
 });
 
 Route::post('/register', [UsersController::class, 'store']);
