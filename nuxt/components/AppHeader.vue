@@ -32,7 +32,7 @@ const logout = async () => {
 </script>
 
 <template>
-  <header class="bg-white drop-shadow z-10 sticky top-0">
+  <header class="bg-white drop-shadow z-20 sticky top-0">
     <div class="navbar max-w-screen-lg mx-auto">
       <div class="flex-1">
         <NuxtLink class="text-2xl font-bold p-3" href="/">Drinko</NuxtLink>
