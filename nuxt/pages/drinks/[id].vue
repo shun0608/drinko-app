@@ -53,7 +53,7 @@ const updateFavorite = async () => {
       method: "POST",
       baseURL: "http://localhost:8000",
     });
-    await updateIsFavoriteStatus(); // isFavorite の状態を更新
+    await updateIsFavoriteStatus();
   } catch (e) {
     console.error(e.response);
   }
@@ -63,7 +63,7 @@ onMounted(updateIsFavoriteStatus);
 </script>
 
 <template>
-  <div class="max-w-screen-lg mx-auto mt-8">
+  <div class="max-w-screen-lg mx-auto mt-8 mb-28">
     <UBreadcrumb
       :links="links"
       :ui="{
@@ -73,62 +73,64 @@ onMounted(updateIsFavoriteStatus);
         inactive: 'hover:text-gray-700 dark:hover:text-gray-200',
       }"
     />
-  </div>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <figure>
-      <img
-        :src="drink.image_url"
-        :alt="drink.name_en"
-        class="aspect-square object-cover"
-      />
-    </figure>
-    <div>
-      <h1>{{ drink.name_en }}</h1>
-      <h4>{{ drink.name_ja }}</h4>
-      <h5>材料</h5>
-      <ul>
-        <li v-for="ingredient in drinkIngredients">
-          {{ ingredient }}
-        </li>
-      </ul>
-      <h5>作り方</h5>
-      <p>{{ drink.recipe_ja }}</p>
-      <div class="flex flex-row gap-2">
-        <SocialShare
-          v-for="network in ['facebook', 'twitter', 'line']"
-          :key="network"
-          :network="network"
-          :styled="true"
-          :label="true"
-          class="text-white"
-        />
-        <button
-          :class="['btn', { favorite: isFavorite }]"
-          @click="updateFavorite()"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            :fill="isFavorite ? 'white' : 'none'"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+    <div class="mx-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-16 mt-5">
+        <figure>
+          <img
+            :src="drink.image_url"
+            :alt="drink.name_en"
+            class="aspect-square object-cover"
+          />
+        </figure>
+        <div>
+          <h1 class="text-3xl font-bold">{{ drink.name_en }}</h1>
+          <h4 class="text-md font-bold mt-3">{{ drink.name_ja }}</h4>
+          <h5 class="text-lg mt-5">材料</h5>
+          <ul class="list-disc list-inside ms-1">
+            <li v-for="ingredient in drinkIngredients">
+              {{ ingredient }}
+            </li>
+          </ul>
+          <h5 class="text-lg mt-5">作り方</h5>
+          <p class="mt-1">{{ drink.recipe_ja }}</p>
+          <div class="flex flex-row gap-2 mt-5">
+            <button
+              :class="['btn rounded-md', { favorite: isFavorite }]"
+              @click="updateFavorite()"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                :fill="isFavorite ? 'white' : 'none'"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                />
+              </svg>
+              お気に入り
+            </button>
+            <SocialShare
+              v-for="network in ['facebook', 'twitter', 'line']"
+              :key="network"
+              :network="network"
+              :styled="true"
+              :label="true"
+              class="text-white"
             />
-          </svg>
-          お気に入り
-        </button>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <h5>おすすめ</h5>
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-    <div v-for="drink in drinks" :key="drink.id">
-      <DrinkCard :drink="drink" />
+      <h5 class="text-2xl mt-20">おすすめ</h5>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 mt-8">
+        <div v-for="drink in drinks" :key="drink.id">
+          <DrinkCard :drink="drink" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
