@@ -14,7 +14,19 @@ class FavoriteController extends Controller
    */
   public function index()
   {
-    //
+    $user = Auth::user();
+    if ($user) {
+      $userId = $user->id;
+      $userFavorites = Faborite::where('user_id', $userId)->pluck('drink_id');
+      if ($userFavorites) {
+        $drinks = Drink::whereIn('id', $userFavorites);
+        return response()->json(compact('drinks', 200));
+      } else {
+        return response()->json(['error' => 'お気に入りしたドリンクがありません'], 404);
+      }
+    } else {
+      return respnse()->json(['error' => 'Unauthorized'], 401);
+    }
   }
 
   /**
