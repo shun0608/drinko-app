@@ -36,7 +36,7 @@ const logout = async () => {
     <div class="navbar max-w-screen-lg mx-auto">
       <div class="flex-1">
         <NuxtLink class="text-2xl font-bold p-3" href="/">Drinko</NuxtLink>
-        <form>
+        <!-- <form>
           <div class="flex">
             <div class="relative w-full">
               <input
@@ -68,7 +68,7 @@ const logout = async () => {
               </button>
             </div>
           </div>
-        </form>
+        </form> -->
       </div>
       <!-- ログインしていないとき -->
       <div v-if="!auth.loggedIn">

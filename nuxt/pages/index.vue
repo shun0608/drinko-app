@@ -1,5 +1,4 @@
 <script setup>
-import { onMounted } from "vue";
 const { $toast } = useNuxtApp();
 const route = useRoute();
 const showToast = (message, type) => {
@@ -16,6 +15,13 @@ onMounted(() => {
     showToast("ユーザー登録が完了しました。", "success");
   }
 });
+
+const { data } = await useFetch(() => `/api/recommend`, {
+  method: "GET",
+  baseURL: "http://localhost:8000",
+});
+console.log(data);
+const drinks = data.value;
 
 // const { $sanctumAuth } = useNuxtApp();
 // const loading = ref(true);
@@ -49,13 +55,26 @@ onMounted(() => {
     </div>
   </div>
 
-  <section class="my-28 px-4">
+  <section class="my-28">
     <SectionTitle>
       <template #english>Recommended</template>
       <template #japanese>おすすめ</template>
     </SectionTitle>
+    <div class="mx-auto max-w-screen-lg mt-10">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-7 mx-3">
+        <div v-for="drink in drinks" :key="drink.id">
+          <DrinkCard :drink="drink" />
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-center mt-10">
+      <NuxtLink class="btn btn-wide btn-neutral" href="/drinks">
+        ドリンク一覧
+      </NuxtLink>
+    </div>
   </section>
-  <section class="my-28 px-4">
+
+  <!-- <section class="my-28 px-4">
     <SectionTitle>
       <template #english>Search</template>
       <template #japanese>ドリンク検索</template>
@@ -86,5 +105,5 @@ onMounted(() => {
         </label>
       </form>
     </div>
-  </section>
+  </section> -->
 </template>

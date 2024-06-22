@@ -42,7 +42,6 @@ class DrinkController extends Controller
       return response()->json(['message' => 'お探しのドリンクは存在しません'], 404);
     }
     $recommendedDrinks = Drink::where('id', '!=', $id)->inRandomOrder()->take(3)->get();
-
     return response()->json([
       'drink' => $drink,
       'recommended' => $recommendedDrinks
@@ -71,5 +70,11 @@ class DrinkController extends Controller
   public function destroy(string $id)
   {
     //
+  }
+
+  public function recommend()
+  {
+    $drinks = Drink::inRandomOrder()->take(3)->get();
+    return  response()->json($drinks);
   }
 }

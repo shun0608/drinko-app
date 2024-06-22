@@ -16,6 +16,7 @@ Route::controller(AuthController::class)->group(function () {
 Route::controller(DrinkController::class)->group(function () {
   Route::get('/drinks', 'index');
   Route::get('/drinks/{id}', 'show');
+  Route::get('/recommend', 'recommend');
 });
 
 Route::middleware('auth:sanctum')->group(function () {

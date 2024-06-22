@@ -1,5 +1,4 @@
 <script setup>
-import DrinkCard from "../components/DrinkCard.vue";
 const { $apiFetch } = useNuxtApp();
 
 const urlPathId = location.pathname.split("/")[2];
