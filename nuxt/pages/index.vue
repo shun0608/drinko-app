@@ -48,9 +48,18 @@ onMounted(() => {
       </p>
     </div>
   </div>
+
   <section class="my-28 px-4">
-    <h2 class="text-7xl font-black text-center">Search</h2>
-    <h4 class="text-2xl font-black text-center mt-2">ソフトドリンク検索</h4>
+    <SectionTitle>
+      <template #english>Recommended</template>
+      <template #japanese>おすすめ</template>
+    </SectionTitle>
+  </section>
+  <section class="my-28 px-4">
+    <SectionTitle>
+      <template #english>Search</template>
+      <template #japanese>ドリンク検索</template>
+    </SectionTitle>
     <div class="max-w-3xl mx-auto my-14 px-4 bg-gray-300 rounded-3xl">
       <form action="" class="py-14 mx-auto">
         <label class="form-control w-full max-w-lg mx-auto">
