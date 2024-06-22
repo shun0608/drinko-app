@@ -4,11 +4,13 @@ definePageMeta({
 });
 const { user } = useAuth();
 const { $apiFetch } = useNuxtApp();
+const favoriteDrinks = ref([]);
 const fetchFavorites = async () => {
   try {
-    await $apiFetch(`/api/mypage/${user.id}`, {
+    const response = await $apiFetch(`/api/mypage/${user.id}`, {
       method: "GET",
     });
+    favoriteDrinks.value = response;
   } catch (e) {
     console.log(e.response);
   }
@@ -16,4 +18,19 @@ const fetchFavorites = async () => {
 onMounted(fetchFavorites);
 </script>
 
-<template></template>
+<template>
+  <div v-for="drink in favoriteDrinks" :key="drink.id">
+    <div class="card card-side bg-base-100 shadow-xl">
+      <figure>
+        <img :src="drink.image_url" :alt="drink.name_en" />
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title">{{ drink.name_en }}</h2>
+        <p>{{ drink.name_ja }}</p>
+        <!-- <div class="card-actions justify-end">
+          <button class="btn btn-primary">Watch</button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</template>
