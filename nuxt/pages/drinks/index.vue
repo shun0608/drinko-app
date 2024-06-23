@@ -1,6 +1,4 @@
 <script setup>
-import DrinkCard from "../components/DrinkCard.vue";
-
 const currentPage = new URL(location.href).searchParams.get("page");
 const page = ref(currentPage ? parseInt(currentPage) : 1);
 

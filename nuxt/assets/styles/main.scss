@@ -5,6 +5,20 @@ body {
   font-family: "Inter", "sans-serif";
 }
 
+input:-webkit-autofill {
+  box-shadow: 0 0 0 1000px rgb(0, 0, 0) inset !important; // background-colorでは変わらないため、box-shadowを指定。
+  -webkit-text-fill-color: #fff !important;
+}
+
+input:-internal-autofill-selected {
+  background-color: #ffffff !important;
+}
+
+// 自動補完後のカーソルが黒になるので、合わせて変更。
+input:-webkit-autofill:focus {
+  caret-color: #fff !important;
+}
+
 .bg-drink {
   background-image: url("~/assets/img/keyvisual.jpg");
   background-color: rgba(#ffffff, 0.35);
