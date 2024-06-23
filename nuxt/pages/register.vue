@@ -56,7 +56,14 @@
         </div>
         <div class="flex flex-col justify-center items-center mt-4">
           <p class="max-w-lg text-gray-400">
-            登録ボタンをクリックされると、利用規約および個人情報保護方針に同意されたこととなります。
+            登録ボタンをクリックされると、<NuxtLink
+              href="/terms-of-use"
+              class="underline"
+              >利用規約</NuxtLink
+            >および
+            <NuxtLink href="/privacy-policy" class="underline"
+              >プライバシーポリシー</NuxtLink
+            >に同意されたこととなります。
           </p>
           <back-to-top-link />
         </div>

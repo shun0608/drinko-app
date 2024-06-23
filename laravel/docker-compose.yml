@@ -24,6 +24,7 @@ services:
             - sail
         depends_on:
             - mariadb
+            - mailpit
     mariadb:
         image: 'mariadb:latest'
         ports:
@@ -51,13 +52,20 @@ services:
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         links:
-            - mariadb:mysql
+            - 'mariadb:mysql'
         ports:
-            - 8888:80
+            - '8888:80'
         environment:
             MYSQL_USERNAME: '${DB_USERNAME}'
             MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
             PMA_HOST: mariadb
+        networks:
+            - sail
+    mailpit:
+        image: 'axllent/mailpit:latest'
+        ports:
+            - '${FORWARD_MAILPIT_PORT:-1025}:1025'
+            - '${FORWARD_MAILPIT_DASHBOARD_PORT:-8025}:8025'
         networks:
             - sail
 networks:

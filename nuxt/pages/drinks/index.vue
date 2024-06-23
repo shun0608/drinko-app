@@ -51,9 +51,11 @@ const links = useBreadcrumbItems({
     v-model="page"
     :page-count="12"
     :total="drinkPaginator.total"
-    :to="(page: number) => ({
-      query: { page }
-    })"
+    :to="
+      (page) => ({
+        query: { page },
+      })
+    "
     :ui="{
       wrapper: 'justify-center mt-24 mb-48 scale-125 sm:scale-150',
     }"
