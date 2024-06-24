@@ -1,10 +1,18 @@
 <script setup>
 const { $apiFetch } = useNuxtApp();
+const { $toast } = useNuxtApp();
 
 const urlPathId = location.pathname.split("/")[2];
 const { data } = await useFetch(() => `/api/drinks/${urlPathId}`, {
   baseURL: "http://localhost:8000",
 });
+
+const showToast = (message, type) => {
+  $toast.open({
+    message,
+    type: type,
+  });
+};
 
 const drink = data.value.drink;
 const drinks = data.value.recommended;
@@ -53,10 +61,12 @@ const updateFavorite = async () => {
       method: "POST",
       baseURL: "http://localhost:8000",
     });
-    console.log(response);
     await updateIsFavoriteStatus();
   } catch (e) {
-    console.error(e.response);
+    showToast(
+      "お気に入り機能をご利用いただくには、ログインが必要です。",
+      "error"
+    );
   }
 };
 

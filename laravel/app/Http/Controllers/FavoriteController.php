@@ -102,7 +102,7 @@ class FavoriteController extends Controller
         return response()->json(['error' => 'お気入り登録時にエラーが発生しました。'], 401);
       }
     } else {
-      return response()->json(['error' => 'Unauthorized'], 401);
+      return response()->json(['error' => 'お気に入り機能をご利用いただくには、ログインが必要です。'], 401);
     }
   }
 }
