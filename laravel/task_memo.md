@@ -15,6 +15,4 @@ AuthRequest
 
 # recaptha設定を行う
 
-# 余裕があれば、変な変換になっている日本語を修正できるよう、管理画面を作成する。
-
 # drinksフォルダ内の、「index.vue」と「[id].vue」のbaseURL変更する
