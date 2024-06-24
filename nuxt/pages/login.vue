@@ -1,3 +1,55 @@
+<script setup>
+import { useField } from "vee-validate";
+import * as yup from "yup";
+import axios from "axios";
+
+const { $sanctumAuth } = useNuxtApp();
+const { $toast } = useNuxtApp();
+
+definePageMeta({
+  middleware: "guest",
+});
+
+const { value: email, errorMessage: emailError } = useField(
+  "email",
+  yup
+    .string()
+    .required("この項目は必須です")
+    .email("メールアドレスの形式で入力してください")
+);
+const { value: password, errorMessage: passwordError } = useField(
+  "password",
+  yup.string().required("この項目は必須です")
+);
+
+const login = async () => {
+  try {
+    await $sanctumAuth.login(
+      {
+        email: email.value,
+        password: password.value,
+      },
+      () => {
+        location.href = "/" + "?loggedin=true";
+      }
+    );
+  } catch (e) {
+    if (e.message) {
+      $toast.open({
+        message: e.message,
+        type: "error",
+      });
+    } else {
+      $toast.open({
+        message:
+          "ログインできませんでした。メールアドレスまたはパスワードが異なります。",
+        type: "error",
+      });
+    }
+  }
+};
+</script>
+
 <template>
   <AuthWhiteBack>
     <template #form-title>ログイン</template>
@@ -47,56 +99,3 @@
     </template>
   </AuthWhiteBack>
 </template>
-
-<script setup>
-import { ref } from "vue";
-import { useField } from "vee-validate";
-import * as yup from "yup";
-
-const router = useRouter();
-const { $sanctumAuth } = useNuxtApp();
-const { $toast } = useNuxtApp();
-
-definePageMeta({
-  middleware: "guest",
-});
-
-const { value: email, errorMessage: emailError } = useField(
-  "email",
-  yup
-    .string()
-    .required("この項目は必須です")
-    .email("メールアドレスの形式で入力してください")
-);
-const { value: password, errorMessage: passwordError } = useField(
-  "password",
-  yup.string().required("この項目は必須です")
-);
-
-const login = async () => {
-  try {
-    await $sanctumAuth.login(
-      {
-        email: email.value,
-        password: password.value,
-      },
-      () => {
-        location.href = "/" + "?loggedin=true";
-      }
-    );
-  } catch (e) {
-    if (e.message) {
-      $toast.open({
-        message: e.message,
-        type: "error",
-      });
-    } else {
-      $toast.open({
-        message:
-          "ログインできませんでした。メールアドレスまたはパスワードが異なります。",
-        type: "error",
-      });
-    }
-  }
-};
-</script>

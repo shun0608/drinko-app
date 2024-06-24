@@ -1,21 +1,4 @@
 <script setup>
-const { $toast } = useNuxtApp();
-const route = useRoute();
-const showToast = (message, type) => {
-  $toast.open({
-    message,
-    type: type,
-  });
-};
-
-onMounted(() => {
-  if (route.query.loggedin === "true") {
-    showToast("ログインしました。", "success");
-  } else if (route.query.registered === "true") {
-    showToast("ユーザー登録が完了しました。", "success");
-  }
-});
-
 const { data } = await useFetch(() => `/api/recommend`, {
   method: "GET",
   baseURL: "http://localhost:8000",

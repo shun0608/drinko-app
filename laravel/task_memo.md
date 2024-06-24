@@ -16,3 +16,5 @@ AuthRequest
 # recaptha設定を行う
 
 # drinksフォルダ内の、「index.vue」と「[id].vue」のbaseURL変更する
+
+# ogImage関係のnuxt.config調整する

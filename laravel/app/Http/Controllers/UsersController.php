@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\User\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Response;
+use Laravel\Sanctum\HasApiTokens;
 
 class UsersController extends Controller
 {
@@ -67,8 +68,10 @@ class UsersController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(User $user)
+  public function destroy($id)
   {
-    //
+    $user = User::find($id);
+    $user->delete();
+    return response()->json('ユーザーの削除が完了しました。');
   }
 }

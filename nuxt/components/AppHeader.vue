@@ -2,6 +2,7 @@
 import { onMounted } from "vue";
 const { $sanctumAuth } = useNuxtApp();
 const auth = useAuth();
+const route = useRoute();
 const router = useRouter();
 const loading = ref(true);
 const { $toast } = useNuxtApp();
@@ -24,11 +25,20 @@ onMounted(async () => {
 
 const logout = async () => {
   await $sanctumAuth.logout((data) => {
-    // location.href = "/" + "?loggedout=true";
     router.push({ path: "/", query: { loggedout: "true" } });
     showToast("ログアウトしました。");
   });
 };
+
+onMounted(() => {
+  if (route.query.loggedin === "true") {
+    showToast("ログインしました。", "success");
+  } else if (route.query.registered === "true") {
+    showToast("ユーザー登録が完了しました。", "success");
+  } else if (route.query.delete === "true") {
+    showToast("退会処理が完了しました。", "success");
+  }
+});
 </script>
 
 <template>

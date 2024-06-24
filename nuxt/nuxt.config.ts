@@ -7,6 +7,9 @@ export default defineNuxtConfig({
   ],
   ssr: false,
   devtools: { enabled: true },
+  ogImage: {
+    enabled: false, // Nuxt OG Imageモジュールを無効にする
+  },
   css: ['~/assets/styles/main.scss'],
   nuxtSanctumAuth: {
     token: false,
