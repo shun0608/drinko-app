@@ -16,7 +16,10 @@
       <aside class="items-center pl-3">
         <p>Copyright ©Drinko 2024 - All right reserved by @shun0608</p>
       </aside>
-      <a class="p-2" href="https://github.com/shun0608/drinko-app"
+      <a
+        class="p-2"
+        href="https://github.com/shun0608/drinko-app"
+        target="_blank"
         ><i class="fab fa-github-square text-xl"></i
       ></a>
     </div>

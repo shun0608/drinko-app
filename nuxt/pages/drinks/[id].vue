@@ -53,6 +53,7 @@ const updateFavorite = async () => {
       method: "POST",
       baseURL: "http://localhost:8000",
     });
+    console.log(response);
     await updateIsFavoriteStatus();
   } catch (e) {
     console.error(e.response);

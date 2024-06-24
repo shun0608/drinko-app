@@ -12,29 +12,20 @@ const fetchFavorites = async () => {
     });
     favoriteDrinks.value = response;
   } catch (e) {
-    console.log(e.response);
+    console.log(e.response._data.error);
   }
 };
+
+const hasFavoriteDrinks = computed(
+  () => Array.isArray(favoriteDrinks.value) && favoriteDrinks.value.length != 0
+);
+
 onMounted(fetchFavorites);
-
-const links = useBreadcrumbItems({
-  overrides: [
-    {
-      label: "ホーム",
-    },
-    {
-      label: "マイページ",
-      to: `/mypage/${user.id}`,
-    },
-  ],
-});
-
-console.log(user.name);
 </script>
 
 <template>
   <div class="max-w-screen-sm mx-auto mt-16 mb-20">
-    <div class="mx-4">
+    <div class="mx-4 min-h-dvh">
       <h1 class="text-center text-2xl md:text-4xl font-bold">Profile</h1>
       <div class="max-w-40 mx-auto">
         <svg
@@ -108,32 +99,33 @@ console.log(user.name);
           </defs>
         </svg>
       </div>
-
       <h5 class="text-center md:text-2xl">{{ user.name }}</h5>
-
       <div role="tablist" class="tabs tabs-bordered mt-10">
         <div role="tab" class="tab text-lg">お気に入りしたドリンク</div>
       </div>
-
-      <div v-for="drink in favoriteDrinks" :key="drink.id" class="mt-6">
-        <NuxtLink class="h-full block" :href="`/drinks/${drink.id}`">
-          <div class="card card-side bg-base-100 shadow-xl">
-            <figure>
-              <img
-                :src="drink.image_url"
-                :alt="drink.name_en"
-                class="w-48 aspect-square"
-              />
-            </figure>
-            <div class="card-body">
-              <h2 class="card-title">{{ drink.name_en }}</h2>
-              <p>{{ drink.name_ja }}</p>
-              <!-- <div class="card-actions justify-end">
-          <button class="btn btn-primary">Watch</button>
-        </div> -->
+      <div v-if="hasFavoriteDrinks">
+        <div v-for="drink in favoriteDrinks" :key="drink.id" class="mt-6">
+          <NuxtLink class="h-full block" :href="`/drinks/${drink.id}`">
+            <div class="card card-side bg-base-100 shadow-xl">
+              <figure>
+                <img
+                  :src="drink.image_url"
+                  :alt="drink.name_en"
+                  class="w-48 aspect-square"
+                />
+              </figure>
+              <div class="card-body">
+                <h2 class="card-title">{{ drink.name_en }}</h2>
+                <p>{{ drink.name_ja }}</p>
+              </div>
             </div>
-          </div>
-        </NuxtLink>
+          </NuxtLink>
+        </div>
+      </div>
+      <div v-else>
+        <p class="text-lg text-center mt-5">
+          お気に入りに追加したドリンクがありません
+        </p>
       </div>
     </div>
   </div>

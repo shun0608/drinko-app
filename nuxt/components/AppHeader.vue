@@ -5,7 +5,6 @@ const auth = useAuth();
 const router = useRouter();
 const loading = ref(true);
 const { $toast } = useNuxtApp();
-console.log(auth);
 
 const showToast = (message, type) => {
   $toast.open({

@@ -18,14 +18,14 @@ class FavoriteController extends Controller
     if ($user) {
       $userId = $user->id;
       $userFavorites = Favorite::where('user_id', $userId)->pluck('drink_id');
-      if ($userFavorites) {
+      if ($userFavorites->isNotEmpty()) {
         $drinks = Drink::whereIn('id', $userFavorites)->get();
         return response()->json($drinks);
       } else {
-        return response()->json(['error' => 'お気に入りしたドリンクがありません'], 404);
+        return response()->json(['error' => 'お気に入りに追加したドリンクがありません'], 404);
       }
     } else {
-      return respnse()->json(['error' => 'Unauthorized'], 401);
+      return response()->json(['error' => 'Unauthorized'], 401);
     }
   }
 
@@ -40,11 +40,11 @@ class FavoriteController extends Controller
   /**
    * Store a newly created resource in storage.
    */
-  public function store($userId, $drinkId)
+  public function store($drinkId, $userId)
   {
     $favorite = new Favorite;
-    $favorite->user_id = $userId;
     $favorite->drink_id = $drinkId;
+    $favorite->user_id = $userId;
     $favorite->save();
     return response()->json(['message' => 'お気に入りに登録されました。'], 201);
   }
@@ -76,19 +76,16 @@ class FavoriteController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy($userId, $drinkId)
+  public function destroy($drinkId, $userId)
   {
-    Favorite::where('user_id', $userId)->where('drink_id', $drinkId)->delete();
+    Favorite::where('drink_id', $drinkId)->where('user_id', $userId)->delete();
     return response()->json(['message' => 'お気に入りから削除されました'], 200);
   }
 
   public function isFavorite($drinkId, $userId = null)
   {
     $userId =  $userId ?? Auth::id();
-    if (!$userId) {
-      return response()->json(['error' => 'Unauthorized'], 401);
-    }
-    return Favorite::where('user_id', $userId)->where('drink_id', $drinkId)->exists();
+    return Favorite::where('drink_id', $drinkId)->where('user_id', $userId)->exists();
   }
 
   public function toggleFavorite($drinkId)
@@ -96,10 +93,13 @@ class FavoriteController extends Controller
     $user = Auth::user();
     if (isset($user)) {
       $userId = $user->id;
-      if ($this->isFavorite($userId, $drinkId)) {
-        return $this->destroy($userId, $drinkId);
-      } else if (!($this->isFavorite($userId, $drinkId))) {
-        return $this->store($userId, $drinkId);
+      $isFavorite = $this->isFavorite($drinkId, $userId);
+      if ($isFavorite) {
+        return $this->destroy($drinkId, $userId);
+      } else if (!$isFavorite) {
+        return $this->store($drinkId, $userId);
+      } else {
+        return response()->json(['error' => 'お気入り登録時にエラーが発生しました。'], 401);
       }
     } else {
       return response()->json(['error' => 'Unauthorized'], 401);
