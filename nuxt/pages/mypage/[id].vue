@@ -127,6 +127,11 @@ onMounted(fetchFavorites);
           お気に入りに追加したドリンクがありません
         </p>
       </div>
+      <div class="flex justify-center mt-20">
+        <NuxtLink class="text-center underline" href="/delete"
+          >退会をご希望の方はこちら</NuxtLink
+        >
+      </div>
     </div>
   </div>
 </template>
