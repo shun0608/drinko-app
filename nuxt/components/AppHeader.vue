@@ -4,31 +4,15 @@ const { $sanctumAuth } = useNuxtApp();
 const auth = useAuth();
 const route = useRoute();
 const router = useRouter();
-const loading = ref(true);
 const { $toast } = useNuxtApp();
-
-const showToast = (message, type) => {
-  $toast.open({
-    message,
-    type: type,
-  });
-};
 
 onMounted(async () => {
   try {
     await $sanctumAuth.getUser();
-    loading.value = false;
   } catch (e) {
-    console.e("Failed to get user:", error);
+    console.log(e.response);
   }
 });
-
-const logout = async () => {
-  await $sanctumAuth.logout((data) => {
-    router.push({ path: "/", query: { loggedout: "true" } });
-    showToast("ログアウトしました。");
-  });
-};
 
 onMounted(() => {
   if (route.query.loggedin === "true") {
@@ -39,6 +23,20 @@ onMounted(() => {
     showToast("退会処理が完了しました。", "success");
   }
 });
+
+const showToast = (message, type) => {
+  $toast.open({
+    message,
+    type: type,
+  });
+};
+
+const logout = async () => {
+  await $sanctumAuth.logout((data) => {
+    router.push({ path: "/", query: { loggedout: "true" } });
+    showToast("ログアウトしました。");
+  });
+};
 </script>
 
 <template>

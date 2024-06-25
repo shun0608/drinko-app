@@ -8,6 +8,7 @@ use App\Http\Requests\User\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Response;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -27,16 +28,20 @@ class UsersController extends Controller
     //
   }
 
-  /**
-   * Store a newly created resource in storage.
-   */
   public function store(UserRequest $request)
   {
-    User::create([
+    $old_user = User::onlyTrashed()->where('email', $request->email)->first();
+    if ($old_user) {
+      $old_user->forceDelete();
+      \Log::info('ユーザーを完全に削除しました: ' . $old_user->email);
+    }
+    $new_user = User::create([
       'name' =>  $request->name,
       'email' => $request->email,
       'password' => Hash::make($request->password),
     ]);
+    $request->session()->regenerate();
+    Auth::login($new_user);
 
     return response()->json(['created' => true], Response::HTTP_OK);
   }
@@ -68,9 +73,14 @@ class UsersController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy($id)
+  public function destroy(Request $request, $id)
   {
     $user = User::find($id);
+    if (!$user) {
+      return response()->json('ユーザーが見つかりません。', 404);
+    }
+    $user->tokens()->delete();
+    $request->session()->invalidate();
     $user->delete();
     return response()->json('ユーザーの削除が完了しました。');
   }

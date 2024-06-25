@@ -1,7 +1,6 @@
 <script setup>
 import { useField } from "vee-validate";
 import * as yup from "yup";
-import axios from "axios";
 
 const { $sanctumAuth } = useNuxtApp();
 const { $toast } = useNuxtApp();

@@ -18,3 +18,4 @@ AuthRequest
 # drinksフォルダ内の、「index.vue」と「[id].vue」のbaseURL変更する
 
 # ogImage関係のnuxt.config調整する
+
