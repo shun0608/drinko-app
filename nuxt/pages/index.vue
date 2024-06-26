@@ -17,6 +17,7 @@ const navigateToSearch = () => {
 </script>
 
 <template>
+  <UseSeoMeta />
   <div class="bg-drink relative">
     <div class="absolute bottom-5 start-4 md:inset-y-2/4 md:start-24">
       <h1 class="text-5xl md:text-8xl font-black">Drinko</h1>
