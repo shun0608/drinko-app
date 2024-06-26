@@ -70,7 +70,7 @@ const navigateToSearch = () => {
             required
           />
         </label>
-        <label class="form-control w-full max-w-lg mx-auto mt-3">
+        <!-- <label class="form-control w-full max-w-lg mx-auto mt-3">
           <div class="label">
             <span class="label-text">今の気分</span>
           </div>
@@ -82,7 +82,7 @@ const navigateToSearch = () => {
             <option>Planet of the Apes</option>
             <option>Star Trek</option>
           </select>
-        </label>
+        </label> -->
         <label class="form-control mt-14">
           <button type="submit" class="btn btn-neutral w-full max-w-lg mx-auto">
             検索
