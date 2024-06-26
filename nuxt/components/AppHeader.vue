@@ -6,6 +6,14 @@ const route = useRoute();
 const router = useRouter();
 const { $toast } = useNuxtApp();
 
+const keyword = ref("");
+const navigateToSearch = () => {
+  router.push({
+    path: "/search",
+    query: { keyword: keyword.value.trim().replace(/[\s]+/g, " ") },
+  });
+};
+
 onMounted(async () => {
   try {
     await $sanctumAuth.getUser();
@@ -37,6 +45,13 @@ const logout = async () => {
     showToast("ログアウトしました。");
   });
 };
+
+router.beforeEach((to, from, next) => {
+  if (to.path !== from.path) {
+    keyword.value = "";
+  }
+  next();
+});
 </script>
 
 <template>
@@ -44,11 +59,12 @@ const logout = async () => {
     <div class="navbar max-w-screen-lg mx-auto">
       <div class="flex-1">
         <NuxtLink class="text-2xl font-bold p-3" href="/">Drinko</NuxtLink>
-        <!-- <form>
+        <form @submit.prevent="navigateToSearch">
           <div class="flex">
             <div class="relative w-full">
               <input
                 type="search"
+                v-model="keyword"
                 id="search-dropdown"
                 class="search-dropdown block px-2 py-3 w-full z-20 text-gray-400 bg-white rounded-e-lg border border-gray-300 dark:bg-white dark:border-gray-300 dark:placeholder-gray-300 dark:text-gray-400 focus:outline-none"
                 placeholder="ソフトドリンク検索"
@@ -76,7 +92,7 @@ const logout = async () => {
               </button>
             </div>
           </div>
-        </form> -->
+        </form>
       </div>
       <!-- ログインしていないとき -->
       <div v-if="!auth.loggedIn">
