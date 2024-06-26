@@ -26,6 +26,7 @@ const links = useBreadcrumbItems({
 </script>
 
 <template>
+  <UseSeoMeta title="ドリンク一覧" description="Drinkoのドリンク一覧ページ" />
   <div class="max-w-screen-lg mx-auto mt-8">
     <UBreadcrumb
       :links="links"

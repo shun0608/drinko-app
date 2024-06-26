@@ -60,6 +60,10 @@ const register = async () => {
 </script>
 
 <template>
+  <UseSeoMeta
+    title="新規ユーザー登録"
+    description="Drinkoの新規ユーザー登録ページ。"
+  />
   <AuthWhiteBack>
     <template #form-title>新規ユーザー登録</template>
     <template #content>

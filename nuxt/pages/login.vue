@@ -50,6 +50,7 @@ const login = async () => {
 </script>
 
 <template>
+  <UseSeoMeta title="ログイン" description="Drinkoログインページ" />
   <AuthWhiteBack>
     <template #form-title>ログイン</template>
     <template #content>

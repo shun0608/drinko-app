@@ -61,6 +61,10 @@ watch(page, () => {
 </script>
 
 <template>
+  <UseSeoMeta
+    :title="`${keyword}の検索結果`"
+    :description="`${keyword}の検索結果`"
+  />
   <div class="max-w-screen-lg mx-auto mt-8">
     <UBreadcrumb
       :links="links"

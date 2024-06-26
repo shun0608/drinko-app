@@ -73,6 +73,11 @@ onMounted(updateIsFavoriteStatus);
 </script>
 
 <template>
+  <UseSeoMeta
+    :title="`${drink.name_en}`"
+    :description="`${drink.recipe_ja}`"
+    :image-url="`${drink.image_url}`"
+  />
   <div class="max-w-screen-lg mx-auto mt-8 mb-28">
     <UBreadcrumb
       :links="links"

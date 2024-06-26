@@ -26,6 +26,7 @@ onMounted(fetchFavorites);
 </script>
 
 <template>
+  <UseSeoMeta />
   <div class="max-w-screen-sm mx-auto mt-16 mb-20">
     <div class="mx-4 min-h-dvh">
       <h1 class="text-center text-2xl md:text-4xl font-bold">Profile</h1>

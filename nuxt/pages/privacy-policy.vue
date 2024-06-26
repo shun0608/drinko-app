@@ -12,6 +12,10 @@ const links = useBreadcrumbItems({
 </script>
 
 <template>
+  <UseSeoMeta
+    title="プライバシーポリシー"
+    description="Drinkoのプライバシーポリシー"
+  />
   <fixed-page :links="links">
     <template #content>
       <h1>プライバシーポリシー</h1>

@@ -30,6 +30,7 @@ const userDelete = async () => {
 </script>
 
 <template>
+  <UseSeoMeta />
   <auth-white-back>
     <template #form-title>退会手続き</template>
     <template #content>
