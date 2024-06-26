@@ -9,12 +9,13 @@ const showToast = (message, type) => {
 };
 
 const urlPathId = location.pathname.split("/")[2];
-const { data } = await useFetch(() => `/api/drinks/${urlPathId}`, {
-  baseURL: "http://localhost:8000",
-});
 
-const drink = data.value.drink;
-const drinks = data.value.recommended;
+const { drink, recommended: drinks } = await $apiFetch(
+  `/api/drinks/${urlPathId}`,
+  {
+    method: "GET",
+  }
+);
 
 const drinkIngredients = [];
 for (let i = 1; i <= 15; i++) {
