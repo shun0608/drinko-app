@@ -4,6 +4,12 @@ import * as yup from "yup";
 
 const { $apiFetch } = useNuxtApp();
 const { $toast } = useNuxtApp();
+const showToast = (message, type) => {
+  $toast.open({
+    message,
+    type: type,
+  });
+};
 
 const { value: email, errorMessage: emailError } = useField(
   "email",
@@ -23,13 +29,6 @@ const { value: password, errorMessage: passwordError } = useField(
     .required("この項目は必須です")
     .min(8, "８文字以上で入力してください")
 );
-
-const showToast = (message, type) => {
-  $toast.open({
-    message,
-    type: type,
-  });
-};
 
 const register = async () => {
   try {

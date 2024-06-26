@@ -19,3 +19,5 @@ AuthRequest
 
 # ogImage関係のnuxt.config調整する
 
+
+Chocolate banana
