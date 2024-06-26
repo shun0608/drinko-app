@@ -2,6 +2,7 @@
 definePageMeta({
   middleware: "auth",
 });
+
 const { $apiFetch } = useNuxtApp();
 const { user } = useAuth();
 const { $toast } = useNuxtApp();

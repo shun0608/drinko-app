@@ -1,18 +1,17 @@
 <script setup>
 const { $apiFetch } = useNuxtApp();
 const { $toast } = useNuxtApp();
-
-const urlPathId = location.pathname.split("/")[2];
-const { data } = await useFetch(() => `/api/drinks/${urlPathId}`, {
-  baseURL: "http://localhost:8000",
-});
-
 const showToast = (message, type) => {
   $toast.open({
     message,
     type: type,
   });
 };
+
+const urlPathId = location.pathname.split("/")[2];
+const { data } = await useFetch(() => `/api/drinks/${urlPathId}`, {
+  baseURL: "http://localhost:8000",
+});
 
 const drink = data.value.drink;
 const drinks = data.value.recommended;
@@ -57,7 +56,7 @@ const updateIsFavoriteStatus = async () => {
 
 const updateFavorite = async () => {
   try {
-    const response = await $apiFetch(`api/favorite/${urlPathId}/`, {
+    await $apiFetch(`api/favorite/${urlPathId}/`, {
       method: "POST",
       baseURL: "http://localhost:8000",
     });

@@ -14,7 +14,6 @@ const total = ref();
 const keyword = route.query.keyword;
 const currentPage = new URL(location.href).searchParams.get("page");
 const page = ref(currentPage ? parseInt(currentPage) : 1);
-console.log(page.value);
 
 const fetchDrinks = async () => {
   if (keyword) {

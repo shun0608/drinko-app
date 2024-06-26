@@ -1,13 +1,13 @@
 <script setup>
-// import { useRouter } from "vue-router";
-const keyword = ref("");
 const router = useRouter();
+
 const { data } = await useFetch(() => `/api/recommend`, {
   method: "GET",
   baseURL: "http://localhost:8000",
 });
 const drinks = data.value;
 
+const keyword = ref("");
 const navigateToSearch = () => {
   router.push({
     path: "/search",

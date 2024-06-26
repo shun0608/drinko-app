@@ -2,8 +2,10 @@
 definePageMeta({
   middleware: "auth",
 });
+
 const { user } = useAuth();
 const { $apiFetch } = useNuxtApp();
+
 const favoriteDrinks = ref([]);
 const fetchFavorites = async () => {
   try {

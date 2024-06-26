@@ -1,13 +1,13 @@
 <script setup>
+definePageMeta({
+  middleware: "guest",
+});
+
 import { useField } from "vee-validate";
 import * as yup from "yup";
 
 const { $sanctumAuth } = useNuxtApp();
 const { $toast } = useNuxtApp();
-
-definePageMeta({
-  middleware: "guest",
-});
 
 const { value: email, errorMessage: emailError } = useField(
   "email",
