@@ -13,10 +13,15 @@ const showToast = (message, type) => {
 
 const keyword = ref("");
 const navigateToSearch = () => {
-  router.push({
-    path: "/search",
-    query: { keyword: keyword.value.trim().replace(/[\s]+/g, " ") },
-  });
+  const trimmedKeyword = keyword.value.trim().replace(/[\s]+/g, " ");
+  if (route.path === "/search") {
+    location.href = `/search?keyword=${trimmedKeyword}`;
+  } else {
+    router.push({
+      path: "/search",
+      query: { keyword: trimmedKeyword },
+    });
+  }
 };
 
 onMounted(async () => {
@@ -50,14 +55,6 @@ router.beforeEach((to, from, next) => {
   }
   next();
 });
-
-watch(
-  () => route.query.keyword,
-  (newKeyword) => {
-    keyword.value = newKeyword || "";
-    location.href = "/search?keyword=" + newKeyword;
-  }
-);
 </script>
 
 <template>
