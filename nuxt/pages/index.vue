@@ -1,9 +1,19 @@
 <script setup>
+// import { useRouter } from "vue-router";
+const keyword = ref("");
+const router = useRouter();
 const { data } = await useFetch(() => `/api/recommend`, {
   method: "GET",
   baseURL: "http://localhost:8000",
 });
 const drinks = data.value;
+
+const navigateToSearch = () => {
+  router.push({
+    path: "/search",
+    query: { keyword: keyword.value.trim().replace(/[\s]+/g, " ") },
+  });
+};
 </script>
 
 <template>
@@ -42,18 +52,23 @@ const drinks = data.value;
     </div>
   </section>
 
-  <!-- <section class="my-28 px-4">
+  <section class="my-28 px-4">
     <SectionTitle>
       <template #english>Search</template>
       <template #japanese>ドリンク検索</template>
     </SectionTitle>
     <div class="max-w-3xl mx-auto my-14 px-4 bg-gray-300 rounded-3xl">
-      <form action="" class="py-14 mx-auto">
+      <form @submit.prevent="navigateToSearch" class="py-14 mx-auto">
         <label class="form-control w-full max-w-lg mx-auto">
           <div class="label">
             <span class="label-text">フリーワード</span>
           </div>
-          <input type="text" class="input input-bordered w-full max-w-lg" />
+          <input
+            type="text"
+            v-model="keyword"
+            class="input input-bordered w-full max-w-lg"
+            required
+          />
         </label>
         <label class="form-control w-full max-w-lg mx-auto mt-3">
           <div class="label">
@@ -69,9 +84,11 @@ const drinks = data.value;
           </select>
         </label>
         <label class="form-control mt-14">
-          <button class="btn btn-neutral w-full max-w-lg mx-auto">検索</button>
+          <button type="submit" class="btn btn-neutral w-full max-w-lg mx-auto">
+            検索
+          </button>
         </label>
       </form>
     </div>
-  </section> -->
+  </section>
 </template>

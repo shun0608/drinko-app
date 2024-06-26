@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\DrinkController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\SearchController;
 use App\Models\User;
 
 Route::controller(AuthController::class)->group(function () {
@@ -33,3 +34,5 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::post('/register', [UsersController::class, 'store']);
+
+Route::get('/search', SearchController::class);

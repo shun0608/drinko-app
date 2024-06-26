@@ -30,20 +30,26 @@ class UsersController extends Controller
 
   public function store(UserRequest $request)
   {
-    $old_user = User::onlyTrashed()->where('email', $request->email)->first();
-    if ($old_user) {
-      $old_user->forceDelete();
-      \Log::info('ユーザーを完全に削除しました: ' . $old_user->email);
+    $credentials = $request->validate([
+      'email' => ['required', 'email'],
+      'password' => ['required'],
+    ]);
+
+    $user = User::withTrashed()->where('email', $request->email)->first();
+    if ($user) {
+      $user->forceDelete();
     }
-    $new_user = User::create([
+
+    $user = User::create([
       'name' =>  $request->name,
       'email' => $request->email,
       'password' => Hash::make($request->password),
     ]);
-    $request->session()->regenerate();
-    Auth::login($new_user);
 
-    return response()->json(['created' => true], Response::HTTP_OK);
+    if ($user && Auth::attempt($credentials)) {
+      $request->session()->regenerate();
+      return response()->json(['created' => true], Response::HTTP_OK);
+    }
   }
 
   /**
