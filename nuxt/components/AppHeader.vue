@@ -1,10 +1,15 @@
 <script setup>
-import { onMounted } from "vue";
-const { $sanctumAuth } = useNuxtApp();
 const auth = useAuth();
 const route = useRoute();
 const router = useRouter();
+const { $sanctumAuth } = useNuxtApp();
 const { $toast } = useNuxtApp();
+const showToast = (message, type) => {
+  $toast.open({
+    message,
+    type: type,
+  });
+};
 
 const keyword = ref("");
 const navigateToSearch = () => {
@@ -32,15 +37,8 @@ onMounted(() => {
   }
 });
 
-const showToast = (message, type) => {
-  $toast.open({
-    message,
-    type: type,
-  });
-};
-
 const logout = async () => {
-  await $sanctumAuth.logout((data) => {
+  await $sanctumAuth.logout(() => {
     router.push({ path: "/", query: { loggedout: "true" } });
     showToast("ログアウトしました。");
   });
