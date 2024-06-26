@@ -1,12 +1,13 @@
 <script setup>
+const { $apiFetch } = useNuxtApp();
+
 const currentPage = new URL(location.href).searchParams.get("page");
 const page = ref(currentPage ? parseInt(currentPage) : 1);
 
-const { data } = await useFetch(() => `/api/drinks?page=${page.value}`, {
-  baseURL: "http://localhost:8000",
+const { data: drinks, total } = await $apiFetch(`/api/drinks`, {
+  method: "GET",
+  params: { page: page.value },
 });
-const drinkPaginator = data.value;
-const drinks = drinkPaginator.data;
 
 watch(page, () => {
   location.href = "/drinks?page=" + page.value;
@@ -50,7 +51,7 @@ const links = useBreadcrumbItems({
   <UPagination
     v-model="page"
     :page-count="12"
-    :total="drinkPaginator.total"
+    :total="total"
     :to="
       (page) => ({
         query: { page },
