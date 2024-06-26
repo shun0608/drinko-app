@@ -50,6 +50,14 @@ router.beforeEach((to, from, next) => {
   }
   next();
 });
+
+watch(
+  () => route.query.keyword,
+  (newKeyword) => {
+    keyword.value = newKeyword || "";
+    location.href = "/search?keyword=" + newKeyword;
+  }
+);
 </script>
 
 <template>

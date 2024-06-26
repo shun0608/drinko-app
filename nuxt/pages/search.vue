@@ -11,16 +11,16 @@ const showToast = (message, type) => {
 
 const drinks = ref([]);
 const total = ref();
-const keyword = route.query.keyword;
+const keyword = ref(route.query.keyword || "");
 const currentPage = new URL(location.href).searchParams.get("page");
 const page = ref(currentPage ? parseInt(currentPage) : 1);
 
 const fetchDrinks = async () => {
-  if (keyword) {
+  if (keyword.value) {
     try {
       const response = await $apiFetch("/api/search", {
         method: "GET",
-        params: { page: page.value, keyword: keyword },
+        params: { page: page.value, keyword: keyword.value },
       });
       drinks.value = response.data;
       total.value = response.total;
@@ -36,7 +36,7 @@ const generateLink = (page) => {
     path: "/search",
     query: {
       page,
-      keyword: decodeURIComponent(keyword),
+      keyword: keyword.value,
     },
   };
 };
@@ -47,7 +47,7 @@ const links = useBreadcrumbItems({
       label: "ホーム",
     },
     {
-      label: `「${keyword}」の検索結果`,
+      label: `「${keyword.value}」の検索結果`,
     },
   ],
 });
