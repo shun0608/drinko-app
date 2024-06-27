@@ -30,26 +30,21 @@ class UsersController extends Controller
 
   public function store(UserRequest $request)
   {
-    $credentials = $request->validate([
-      'email' => ['required', 'email'],
-      'password' => ['required'],
-    ]);
+    $old_user = User::withTrashed()->where('email', $request->email)->first();
 
-    $user = User::withTrashed()->where('email', $request->email)->first();
-    if ($user) {
-      $user->forceDelete();
+    if ($old_user) {
+      $old_user->forceDelete();
     }
 
-    $user = User::create([
+    $new_user = User::create([
       'name' =>  $request->name,
       'email' => $request->email,
       'password' => Hash::make($request->password),
     ]);
 
-    if ($user && Auth::attempt($credentials)) {
-      $request->session()->regenerate();
-      return response()->json(['created' => true], Response::HTTP_OK);
-    }
+    Auth::login($new_user);
+
+    return response()->json(['created' => true], Response::HTTP_OK);
   }
 
   /**
@@ -81,7 +76,7 @@ class UsersController extends Controller
    */
   public function destroy(Request $request, $id)
   {
-    $user = User::find($id);
+    $user = Auth::id();
     if (!$user) {
       return response()->json('ユーザーが見つかりません。', 404);
     }

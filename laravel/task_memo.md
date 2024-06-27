@@ -6,18 +6,4 @@ https://readouble.com/laravel/11.x/ja/sanctum.html
 UserRequest
 AuthRequest
 
-# ログイン後、閲覧していたページへリダイレクトするように処理を書く
-現在は、すべてトップページへ行くようになっている
-
-# default.vueのHeadタグを変更する
-
 # favicon設定する。
-
-# recaptha設定を行う
-
-# drinksフォルダ内の、「index.vue」と「[id].vue」のbaseURL変更する
-
-# ogImage関係のnuxt.config調整する
-
-
-Chocolate banana
