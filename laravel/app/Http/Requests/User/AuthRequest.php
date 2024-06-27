@@ -24,9 +24,7 @@ class AuthRequest extends FormRequest
   public function rules(): array
   {
     return [
-      //実装時は、
-      // 'email' => ['required', 'string', 'email:strict,dns,spoof', 'max:255'],
-      'email' => ['required', 'string', 'email:rfc', 'max:255'],
+      'email' => ['required', 'string', 'email:strict,dns,spoof', 'max:255'],
       'password' => ['required', 'string']
     ];
   }

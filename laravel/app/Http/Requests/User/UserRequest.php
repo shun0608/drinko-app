@@ -25,10 +25,8 @@ class UserRequest extends FormRequest
   public function rules(): array
   {
     return [
-      //実装時は、
-      // 'email' => ['required', 'string', 'email:strict,dns,spoof', 'max:255', 'unique:users,email,NULL,id,deleted_at,NULL'],
       'name' => ['required', 'max:255'],
-      'email' => ['required', 'string', 'email:rfc', 'max:255', 'unique:users,email,NULL,id,deleted_at,NULL'],
+      'email' => ['required', 'string', 'email:strict,dns,spoof', 'max:255', 'unique:users,email,NULL,id,deleted_at,NULL'],
       'password' => ['required', 'string', Password::min(8)]
     ];
   }
