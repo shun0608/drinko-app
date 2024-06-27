@@ -74,9 +74,9 @@ class UsersController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(Request $request, $id)
+  public function destroy(Request $request)
   {
-    $user = Auth::id();
+    $user = Auth::user();
     if (!$user) {
       return response()->json('ユーザーが見つかりません。', 404);
     }

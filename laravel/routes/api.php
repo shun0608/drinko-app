@@ -30,7 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
   Route::get('/isFavorite/{drinkId}', [FavoriteController::class, 'isFavorite']);
 
   Route::get('/mypage/{userId}', [FavoriteController::class, 'index']);
-  Route::delete('/users/{id}', [UsersController::class, 'destroy']);
+  Route::delete('/user/delete', [UsersController::class, 'destroy']);
 });
 
 Route::post('/register', [UsersController::class, 'store']);

@@ -15,7 +15,7 @@ const showToast = (message, type) => {
 
 const userDelete = async () => {
   try {
-    await $apiFetch(`/api/users/${user.id}`, {
+    await $apiFetch(`/api/user/delete`, {
       method: "DELETE",
     });
     location.href = "/" + "?delete=true";
