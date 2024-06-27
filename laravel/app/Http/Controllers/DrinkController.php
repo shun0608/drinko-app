@@ -3,18 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Drink;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\JsonResponse;
+use App\Models\Drink;
 
 class DrinkController extends Controller
 {
   /**
-   * Display a listing of the resource.
+   * Display a paginated list of drinks.
+   *
+   * @return JsonResponse
    */
-  public function index()
+  public function index(): JsonResponse
   {
     $drinks = Drink::paginate(12)->withPath('/drinks');
-    return $drinks;
+
+    return response()->json($drinks);
   }
 
   /**
@@ -33,9 +37,12 @@ class DrinkController extends Controller
   }
 
   /**
-   * Display the specified resource.
+   * Display the specified drink and recommended drinks.
+   *
+   * @param int $id
+   * @return JsonResponse
    */
-  public function show($id)
+  public function show(int $id): JsonResponse
   {
     $drink = Drink::find($id);
     if (!$drink) {
@@ -72,7 +79,12 @@ class DrinkController extends Controller
     //
   }
 
-  public function recommend()
+  /**
+   * Recommend drinks.
+   *
+   * @return JsonResponse
+   */
+  public function recommend(): JsonResponse
   {
     $drinks = Drink::inRandomOrder()->take(3)->get();
     return  response()->json($drinks);

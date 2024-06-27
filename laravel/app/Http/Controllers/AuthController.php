@@ -3,13 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\User\AuthRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\JsonResponse;
+use App\Http\Requests\User\AuthRequest;
 use App\Models\User;
 
 class AuthController extends Controller
 {
-  public function login(AuthRequest $request)
+  /**
+   * Handle a login request to the application.
+   *
+   * @param AuthRequest $request
+   * @return JsonResponse
+   */
+  public function login(AuthRequest $request): JsonResponse
   {
     $credentials = $request->validate([
       'email' => ['required', 'email'],
@@ -20,21 +27,27 @@ class AuthController extends Controller
       ->whereNull('deleted_at')
       ->first();
 
-    if (Auth::attempt($credentials)) {
+    if ($user && Auth::attempt($credentials)) {
       $request->session()->regenerate();
-      Auth::login($user);
       return response()->json(['message' => 'ログインしました。']);
     }
     return response()->json(['message' => 'ログインできませんでした。メールアドレスまたはパスワードが異なります。'], 401);
   }
 
-  public function logout(Request $request)
+  /**
+   * Log the user out of the application.
+   *
+   * @param Request $request
+   * @return JsonResponse
+   */
+  public function logout(Request $request): JsonResponse
   {
     Auth::logout();
 
     $request->session()->invalidate();
 
     $request->session()->regenerateToken();
+
     return response()->json(['message' => 'ログアウト成功']);
   }
 }

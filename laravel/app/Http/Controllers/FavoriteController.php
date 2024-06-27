@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Drink;
 use App\Models\Favorite;
@@ -11,8 +12,10 @@ class FavoriteController extends Controller
 {
   /**
    * Display a listing of the resource.
+   *
+   * @return JsonResponse
    */
-  public function index()
+  public function index(): JsonResponse
   {
     $user = Auth::user();
     if ($user) {
@@ -39,13 +42,18 @@ class FavoriteController extends Controller
 
   /**
    * Store a newly created resource in storage.
+   *
+   * @param int $drinkId
+   * @param int $userId
+   * @return JsonResponse
    */
-  public function store($drinkId, $userId)
+  public function store(int $drinkId, int $userId): JsonResponse
   {
     $favorite = new Favorite;
     $favorite->drink_id = $drinkId;
     $favorite->user_id = $userId;
     $favorite->save();
+
     return response()->json(['message' => 'お気に入りに登録されました。'], 201);
   }
 
@@ -75,20 +83,39 @@ class FavoriteController extends Controller
 
   /**
    * Remove the specified resource from storage.
+   *
+   * @param int $drinkId
+   * @param int $userId
+   * @return JsonResponse
    */
-  public function destroy($drinkId, $userId)
+  public function destroy(int $drinkId, int $userId): JsonResponse
   {
     Favorite::where('drink_id', $drinkId)->where('user_id', $userId)->delete();
+
     return response()->json(['message' => 'お気に入りから削除されました'], 200);
   }
 
-  public function isFavorite($drinkId, $userId = null)
+  /**
+   * Check if a drink is in the user's favorites.
+   *
+   * @param int $drinkId
+   * @param int|null $userId
+   * @return bool
+   */
+  public function isFavorite(int $drinkId, int $userId = null): bool
   {
     $userId =  $userId ?? Auth::id();
+
     return Favorite::where('drink_id', $drinkId)->where('user_id', $userId)->exists();
   }
 
-  public function toggleFavorite($drinkId)
+  /**
+   * Toggle the favorite status of a drink.
+   *
+   * @param int $drinkId
+   * @return collable|JsonResponse
+   */
+  public function toggleFavorite(int $drinkId): collable|JsonResponse
   {
     $user = Auth::user();
     if (isset($user)) {

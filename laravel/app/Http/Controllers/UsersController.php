@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Requests\User\UserRequest;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Response;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use App\Http\Requests\User\UserRequest;
+use Laravel\Sanctum\HasApiTokens;
+
 
 class UsersController extends Controller
 {
@@ -28,13 +30,15 @@ class UsersController extends Controller
     //
   }
 
-  public function store(UserRequest $request)
+  /**
+   * Store a newly created user in storage.
+   *
+   * @param UserRequest $request
+   * @return JsonResponse
+   */
+  public function store(UserRequest $request): JsonResponse
   {
-    $old_user = User::withTrashed()->where('email', $request->email)->first();
-
-    if ($old_user) {
-      $old_user->forceDelete();
-    }
+    $this->deleteOldUserIfExists($request->email);
 
     $new_user = User::create([
       'name' =>  $request->name,
@@ -45,6 +49,21 @@ class UsersController extends Controller
     Auth::login($new_user);
 
     return response()->json(['created' => true], Response::HTTP_OK);
+  }
+
+  /**
+   * Delete the old user if exists.
+   *
+   * @param string $email
+   * @return void
+   */
+  protected function deleteOldUserIfExists(string $email): void
+  {
+    $oldUser = User::withTrashed()->where('email', $email)->first();
+
+    if ($oldUser) {
+      $oldUser->forceDelete();
+    }
   }
 
   /**
@@ -73,8 +92,11 @@ class UsersController extends Controller
 
   /**
    * Remove the specified resource from storage.
+   *
+   * @param Request $request
+   * @return JsonResponse
    */
-  public function destroy(Request $request)
+  public function destroy(Request $request): JsonResponse
   {
     $user = Auth::user();
     if (!$user) {
@@ -83,6 +105,7 @@ class UsersController extends Controller
     $user->tokens()->delete();
     $request->session()->invalidate();
     $user->delete();
+
     return response()->json('ユーザーの削除が完了しました。');
   }
 }

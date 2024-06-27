@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use App\Models\Drink;
 
 class SearchController extends Controller
 {
-  public function __invoke(Request $request)
+  /**
+   * Search for drinks based on the keyword.
+   *
+   * @param Request $request
+   * @return JsonResponse
+   */
+  public function __invoke(Request $request): JsonResponse
   {
     $keyword = $request->keyword;
 
@@ -26,7 +33,6 @@ class SearchController extends Controller
 
     $drinks = $query->get();
     $drinks = $query->paginate(12)->withPath('/search')->appends(['keyword' => $keyword]);
-
 
     return response()->json($drinks);
   }
