@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   css: ['~/assets/styles/main.scss'],
   nuxtSanctumAuth: {
     token: false,
-    baseUrl: "https://drinko.jp",
+    baseUrl: "https://api.drinko.jp",
     endpoints: {
       csrf: "/sanctum/csrf-cookie",
       login: "/api/login",
