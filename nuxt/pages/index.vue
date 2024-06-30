@@ -3,7 +3,6 @@ const router = useRouter();
 
 const { data } = await useFetch(() => `/api/recommend`, {
   method: "GET",
-  baseURL: "http://localhost:8000",
 });
 const drinks = data.value;
 
