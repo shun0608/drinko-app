@@ -59,7 +59,6 @@ const updateFavorite = async () => {
   try {
     await $apiFetch(`api/favorite/${urlPathId}/`, {
       method: "POST",
-      baseURL: "http://localhost:8000",
     });
     await updateIsFavoriteStatus();
   } catch (e) {
