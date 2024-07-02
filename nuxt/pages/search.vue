@@ -13,7 +13,7 @@ const drinks = ref([]);
 const total = ref();
 const keyword = ref(route.query.keyword || "");
 const currentPage = new URL(location.href).searchParams.get("page");
-const page = ref(currentP
+const page = ref(currentPage ? parseInt(currentPage) : 1);
 const loading = ref(false);
 
 const fetchDrinks = async () => {
@@ -54,6 +54,8 @@ const links = useBreadcrumbItems({
     },
   ],
 });
+
+// onMounted(fetchDrinks);
 
 onMounted(async () => {
   loading.value = true;

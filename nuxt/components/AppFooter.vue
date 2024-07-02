@@ -1,10 +1,15 @@
 <template>
   <div class="w-full max-w-screen-lg mx-auto my-4">
     <nav>
-      <ul class="flex gap-8 mx-4">
+      <ul class="flex gap-2 sm:gap-8 mx-4">
         <li><NuxtLink href="/terms-of-use">利用規約</NuxtLink></li>
         <li>
           <NuxtLink href="/privacy-policy">プライバシーポリシー</NuxtLink>
+        </li>
+        <li>
+          <a href="https://forms.gle/QLbLHn9JYfDvDJ5E6" target="_blank"
+            >お問い合わせ</a
+          >
         </li>
       </ul>
     </nav>
