@@ -14,8 +14,6 @@ class UsersTableSeeder extends Seeder
    */
   public function run(): void
   {
-    DB::table('users')->delete();
-
     $data = [
       [
         'name' => 'テストアカウント',
