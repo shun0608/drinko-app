@@ -93,7 +93,7 @@ watch(page, () => {
       </div>
     </div>
   </div>
-  <div v-if="drinks.length > 0">
+  <div v-if="drinks.length > 0" class="flex justify-center">
     <UPagination
       v-model="page"
       :page-count="12"

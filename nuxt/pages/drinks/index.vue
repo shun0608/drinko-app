@@ -37,29 +37,27 @@ const links = useBreadcrumbItems({
         inactive: 'hover:text-gray-700 dark:hover:text-gray-200',
       }"
     />
-  </div>
-
-  <div class="mx-auto max-w-screen-lg mt-10">
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-3"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-3 mt-10"
     >
       <div v-for="drink in drinks" :key="drink.id">
         <DrinkCard :drink="drink" />
       </div>
     </div>
+    <div class="flex justify-center">
+      <UPagination
+        v-model="page"
+        :page-count="12"
+        :total="total"
+        :to="
+          (page) => ({
+            query: { page },
+          })
+        "
+        :ui="{
+          wrapper: 'justify-center mt-24 mb-48 scale-125 sm:scale-150',
+        }"
+      />
+    </div>
   </div>
-
-  <UPagination
-    v-model="page"
-    :page-count="12"
-    :total="total"
-    :to="
-      (page) => ({
-        query: { page },
-      })
-    "
-    :ui="{
-      wrapper: 'justify-center mt-24 mb-48 scale-125 sm:scale-150',
-    }"
-  />
 </template>
