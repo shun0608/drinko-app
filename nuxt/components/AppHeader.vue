@@ -55,6 +55,13 @@ router.beforeEach((to, from, next) => {
   }
   next();
 });
+
+router.afterEach(() => {
+  const drawer = document.getElementById("header-drawer");
+  if (drawer && drawer.checked) {
+    drawer.checked = false;
+  }
+});
 </script>
 
 <template>
