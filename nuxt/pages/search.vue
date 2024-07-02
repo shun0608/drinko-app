@@ -14,6 +14,8 @@ const total = ref();
 const keyword = ref(route.query.keyword || "");
 const currentPage = new URL(location.href).searchParams.get("page");
 const page = ref(currentPage ? parseInt(currentPage) : 1);
+const loading = ref(false);
+console.log(loading.value);
 
 const fetchDrinks = async () => {
   if (keyword.value) {
@@ -24,9 +26,11 @@ const fetchDrinks = async () => {
       });
       drinks.value = response.data;
       total.value = response.total;
+      loading.value = false;
     } catch (error) {
       console.log(error);
       showToast("検索に失敗しました。再度実行してください", "error");
+      loading.value = false;
     }
   }
 };
@@ -52,7 +56,13 @@ const links = useBreadcrumbItems({
   ],
 });
 
-onMounted(fetchDrinks);
+// onMounted(fetchDrinks);
+
+onMounted(async () => {
+  loading.value = true;
+  fetchDrinks();
+});
+
 watch(route, fetchDrinks);
 
 watch(page, () => {
@@ -78,20 +88,23 @@ watch(page, () => {
   </div>
 
   <div class="mx-auto max-w-screen-lg mt-10 min-h-dvh">
-    <div v-if="drinks.length > 0">
-      <div
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-3"
-      >
-        <div v-for="drink in drinks" :key="drink.id">
-          <DrinkCard :drink="drink" />
+    <div v-if="loading == false">
+      <div v-if="drinks.length > 0">
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-3"
+        >
+          <div v-for="drink in drinks" :key="drink.id">
+            <DrinkCard :drink="drink" />
+          </div>
+        </div>
+      </div>
+      <div v-else>
+        <div class="mx-4">
+          <p>検索結果が存在しません。</p>
         </div>
       </div>
     </div>
-    <div v-else>
-      <div class="mx-4">
-        <p>検索結果が存在しません。</p>
-      </div>
-    </div>
+    <div v-else></div>
   </div>
   <div v-if="drinks.length > 0" class="flex justify-center">
     <UPagination
