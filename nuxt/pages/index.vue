@@ -2,10 +2,9 @@
 const router = useRouter();
 const { $apiFetch } = useNuxtApp();
 
-const { data } = await $apiFetch("/api/recommend", {
+const drinks = await $apiFetch("/api/recommend", {
   method: "GET",
 });
-const drinks = data;
 
 const keyword = ref("");
 const navigateToSearch = () => {
