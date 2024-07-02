@@ -104,7 +104,9 @@ watch(page, () => {
         </div>
       </div>
     </div>
-    <div v-else></div>
+    <div v-else class="flex justify-center">
+      <span class="loading loading-spinner loading-lg"></span>
+    </div>
   </div>
   <div v-if="drinks.length > 0" class="flex justify-center">
     <UPagination
