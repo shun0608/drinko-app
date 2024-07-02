@@ -154,6 +154,16 @@ const links = useBreadcrumbItems({
           私が別途定める場合を除いて，変更後のプライバシーポリシーは，本ウェブサイトに掲載したときから効力を生じるものとします。
         </li>
       </ol>
+      <h2>第10条（お問い合わせ窓口）</h2>
+      <p>本ポリシーに関するお問い合わせは，下記の窓口までお願いいたします。</p>
+      <p>
+        <a
+          href="https://forms.gle/QLbLHn9JYfDvDJ5E6"
+          target="_blank"
+          class="underline"
+          >お問い合わせフォーム</a
+        >
+      </p>
       <p class="text-end">以上</p>
     </template>
   </fixed-page>
