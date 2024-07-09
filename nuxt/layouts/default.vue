@@ -2,7 +2,6 @@
 useHead({
   htmlAttrs: {
     lang: "ja",
-    // prefix: 'og: http://ogp.me/ns#'
   },
   link: [
     {
@@ -26,35 +25,6 @@ useHead({
       crossorigin: "anonymous",
     },
   ],
-});
-
-useSeoMeta({
-  // ここからした４つ動的に変更できるように
-  // title: "Drinko",
-  // ogTitle: "Drinko",
-  // description: "丁寧に作ったドリンクで安らぎのひとときを",
-  // ogDescription: "丁寧に作ったドリンクで安らぎのひとときを",
-  // ogImage: {
-  //   url: "~/assets/img/site-thumbnail.jpg",
-  //   type: "image/jpeg",
-  // },
-  // // この下は動的に変更でるようにする
-  // ogUrl: "http://~~",
-  // // この下も動的に変更できるようにする　下層ページをarticleに
-  // ogType: "website",
-  // ogLocale: "ja",
-  // ogSiteName: "Drinko",
-  // twitterCard: "summary",
-  // // ここから下２つは動的に変更
-  // twitterTitle: "Drinko",
-  // twitterDescription: "丁寧に作ったドリンクで安らぎのひとときを",
-  // twitterImage: {
-  //   url: "~/assets/img/site-thumbnail.jpg",
-  //   type: "image/jpeg",
-  // },
-  // charset: "utf-8",
-  // author: "shun0608",
-  // viewport: "width=device-width, initial-scale=1.0",
 });
 </script>
 
