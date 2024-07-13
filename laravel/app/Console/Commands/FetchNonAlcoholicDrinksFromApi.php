@@ -2,13 +2,9 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-
-use Illuminate\Support\Facades\Http;
-
 use App\Models\Drink;
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Http;
 
 class FetchNonAlcoholicDrinksFromApi extends Command
 {
@@ -21,7 +17,8 @@ class FetchNonAlcoholicDrinksFromApi extends Command
         $non_alcoholic_response = Http::get('https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic');
 
         if ($non_alcoholic_response->failed()) {
-            $this->error('Request failed: ' . $non_alcoholic_response->body());
+            $this->error('Request failed: '.$non_alcoholic_response->body());
+
             return 0;
         }
 
@@ -35,6 +32,7 @@ class FetchNonAlcoholicDrinksFromApi extends Command
             $drink->image_url = $drink_element['strDrinkThumb'];
             $drink->save();
         }
+
         return 1;
     }
 }

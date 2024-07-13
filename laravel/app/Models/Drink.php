@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Drink extends Model
 {
-  use HasFactory;
+    use HasFactory;
 
-  public function favorites()
-  {
-    return $this->hasMany(Favorite::class);
-  }
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
 
-  protected $guarded = [];
+    protected $guarded = [];
 }

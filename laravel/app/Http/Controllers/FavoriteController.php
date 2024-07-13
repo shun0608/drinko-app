@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Drink;
 use App\Models\Favorite;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FavoriteController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return JsonResponse
      */
     public function index(): JsonResponse
     {
@@ -23,6 +21,7 @@ class FavoriteController extends Controller
             $userFavorites = Favorite::where('user_id', $userId)->pluck('drink_id');
             if ($userFavorites->isNotEmpty()) {
                 $drinks = Drink::whereIn('id', $userFavorites)->get();
+
                 return response()->json($drinks);
             } else {
                 return response()->json(['error' => 'お気に入りに追加したドリンクがありません'], 404);
@@ -42,10 +41,6 @@ class FavoriteController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param int $drinkId
-     * @param int $userId
-     * @return JsonResponse
      */
     public function store(int $drinkId, int $userId): JsonResponse
     {
@@ -83,10 +78,6 @@ class FavoriteController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param int $drinkId
-     * @param int $userId
-     * @return JsonResponse
      */
     public function destroy(int $drinkId, int $userId): JsonResponse
     {
@@ -97,23 +88,16 @@ class FavoriteController extends Controller
 
     /**
      * Check if a drink is in the user's favorites.
-     *
-     * @param int $drinkId
-     * @param int|null $userId
-     * @return bool
      */
-    public function isFavorite(int $drinkId, int $userId = null): bool
+    public function isFavorite(int $drinkId, ?int $userId = null): bool
     {
-        $userId =  $userId ?? Auth::id();
+        $userId = $userId ?? Auth::id();
 
         return Favorite::where('drink_id', $drinkId)->where('user_id', $userId)->exists();
     }
 
     /**
      * Toggle the favorite status of a drink.
-     *
-     * @param int $drinkId
-     * @return callable|JsonResponse
      */
     public function toggleFavorite(int $drinkId): callable|JsonResponse
     {

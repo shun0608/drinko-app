@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests\User;
 
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
 class AuthRequest extends FormRequest
 {
@@ -25,7 +23,7 @@ class AuthRequest extends FormRequest
     {
         return [
             'email' => ['required', 'string', 'email:strict,dns,spoof', 'max:255'],
-            'password' => ['required', 'string']
+            'password' => ['required', 'string'],
         ];
     }
 }

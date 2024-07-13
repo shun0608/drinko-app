@@ -2,10 +2,8 @@
 
 namespace App\Http\Requests\User;
 
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UserRequest extends FormRequest
 {
@@ -27,7 +25,7 @@ class UserRequest extends FormRequest
         return [
             'name' => ['required', 'max:255'],
             'email' => ['required', 'string', 'email:strict,dns,spoof', 'max:255', 'unique:users,email,NULL,id,deleted_at,NULL'],
-            'password' => ['required', 'string', Password::min(8)]
+            'password' => ['required', 'string', Password::min(8)],
         ];
     }
 }

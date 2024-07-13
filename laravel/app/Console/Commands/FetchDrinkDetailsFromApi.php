@@ -2,12 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Drink;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7;
-use GuzzleHttp\Exception\ClientException;
-use App\Models\Drink;
 
 class FetchDrinkDetailsFromApi extends Command
 {
@@ -21,10 +18,11 @@ class FetchDrinkDetailsFromApi extends Command
         $drink_details_url = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
 
         foreach ($drinks as $drink) {
-            $fetchedDrinkDetails = Http::get($drink_details_url . $drink['cocktailDB_id']);
+            $fetchedDrinkDetails = Http::get($drink_details_url.$drink['cocktailDB_id']);
 
             if ($fetchedDrinkDetails->failed()) {
-                $this->error('Request failed: ' . $fetchedDrinkDetails->body());
+                $this->error('Request failed: '.$fetchedDrinkDetails->body());
+
                 return 0;
             }
 
@@ -33,13 +31,14 @@ class FetchDrinkDetailsFromApi extends Command
             $drink = Drink::where('cocktailDB_id', $drink['cocktailDB_id'])->first();
             $drink->recipe_en = $drink_details['strInstructions'];
             for ($i = 1; $i <= 15; $i++) {
-                $ingredient_property = 'ingredient_en' . $i;
-                $measure_property = 'measure_en' . $i;
-                $drink->$ingredient_property = $drink_details['strIngredient' . $i];
-                $drink->$measure_property = $drink_details['strMeasure' . $i];
+                $ingredient_property = 'ingredient_en'.$i;
+                $measure_property = 'measure_en'.$i;
+                $drink->$ingredient_property = $drink_details['strIngredient'.$i];
+                $drink->$measure_property = $drink_details['strMeasure'.$i];
             }
             $drink->save();
         }
+
         return 1;
     }
 }
