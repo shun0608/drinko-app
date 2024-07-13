@@ -6,13 +6,7 @@ parameters:
     paths:
         - app/
 
-    # Level 9 is the highest level
     level: 5
 
-#    ignoreErrors:
-#        - '#PHPDoc tag @var#'
-#
-#    excludePaths:
-#        - ./*/*/FileToBeExcluded.php
-#
-#    checkMissingIterableValueType: false
+    ignoreErrors:
+    - '#Call to an undefined method Illuminate\\Contracts\\Pagination\\LengthAwarePaginator::withPath\(\).#'
