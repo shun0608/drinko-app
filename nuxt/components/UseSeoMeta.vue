@@ -34,25 +34,26 @@ useSeoMeta({
   charset: "utf-8",
   author: "shun0608",
   viewport: "width=device-width, initial-scale=1.0",
-  ogType: `${ogType.value}`,
-  ogUrl: `${currentUrl.value}`,
+  ogType: () => `${ogType.value}`,
+  ogUrl: () => `${currentUrl.value}`,
 
-  title: props.title,
-  ogTitle: props.title,
-  twitterTitle: props.title,
+  title: () => `${props.title}`,
+  ogTitle: () => `${props.title}`,
+  twitterTitle: () => `${props.title}`,
 
-  description: props.description,
-  ogDescription: props.description,
-  twitterDescription: props.description,
+  description: () => `${props.description}`,
+  ogDescription: () => `${props.description}`,
+  twitterDescription: () => `${props.description}`,
 
   ogImage: {
-    url: props.imageUrl,
-    type: props.imageType,
+    url: () => `${props.imageUrl}`,
+    type: () => `${props.imageType}`,
   },
   twitterImage: {
-    url: props.imageUrl,
-    type: props.imageType,
+    url: () => `${props.imageUrl}`,
+    type: () => `${props.imageType}`,
   },
 });
-const render = () => h("");
 </script>
+
+<template></template>

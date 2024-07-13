@@ -8,6 +8,11 @@ export default defineNuxtConfig({
   ssr: false,
   devtools: { enabled: true },
   css: ['~/assets/styles/main.scss'],
+  app: {
+    head: {
+      titleTemplate: '%s | Drinko',
+    },
+  },
   nuxtSanctumAuth: {
     token: false,
     baseUrl: "http://localhost:8000",
