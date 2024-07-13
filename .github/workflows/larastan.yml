@@ -8,6 +8,11 @@ on:
 jobs:
   larastan:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: laravel
+        
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
