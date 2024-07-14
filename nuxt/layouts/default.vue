@@ -29,9 +29,11 @@ useHead({
 </script>
 
 <template>
-  <AppHeader />
-  <main class="bg-white">
-    <slot />
-  </main>
-  <AppFooter />
+  <div>
+    <AppHeader />
+    <main class="bg-white">
+      <slot />
+    </main>
+    <AppFooter />
+  </div>
 </template>
