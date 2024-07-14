@@ -1,17 +1,17 @@
 export default defineNuxtConfig({
   modules: [
-    'nuxt-sanctum-auth',
+    "nuxt-sanctum-auth",
     "@nuxt/ui",
     "@nuxtjs/seo",
     "@stefanobartoletti/nuxt-social-share",
-    "@nuxt/eslint"
+    "@nuxt/eslint",
   ],
   ssr: false,
   devtools: { enabled: true },
-  css: ['~/assets/styles/main.scss'],
+  css: ["~/assets/styles/main.scss"],
   app: {
     head: {
-      titleTemplate: '%s | Drinko',
+      titleTemplate: "%s | Drinko",
     },
   },
   nuxtSanctumAuth: {
@@ -33,6 +33,6 @@ export default defineNuxtConfig({
       home: "/",
       login: "/login",
       logout: "/",
-    }
+    },
   },
-})
+});

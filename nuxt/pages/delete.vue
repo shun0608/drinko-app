@@ -22,7 +22,7 @@ const userDelete = async () => {
     console.log(e);
     showToast(
       "処理中にエラーが発生しました。再度退会手続きを行ってください。",
-      "error"
+      "error",
     );
   }
 };

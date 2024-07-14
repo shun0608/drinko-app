@@ -19,7 +19,7 @@ const fetchFavorites = async () => {
 };
 
 const hasFavoriteDrinks = computed(
-  () => Array.isArray(favoriteDrinks.value) && favoriteDrinks.value.length != 0
+  () => Array.isArray(favoriteDrinks.value) && favoriteDrinks.value.length != 0,
 );
 
 onMounted(fetchFavorites);

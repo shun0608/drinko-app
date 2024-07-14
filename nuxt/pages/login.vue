@@ -14,11 +14,11 @@ const { value: email, errorMessage: emailError } = useField(
   yup
     .string()
     .required("この項目は必須です")
-    .email("メールアドレスの形式で入力してください")
+    .email("メールアドレスの形式で入力してください"),
 );
 const { value: password, errorMessage: passwordError } = useField(
   "password",
-  yup.string().required("この項目は必須です")
+  yup.string().required("この項目は必須です"),
 );
 
 const login = async () => {
@@ -30,7 +30,7 @@ const login = async () => {
       },
       () => {
         location.href = "/" + "?loggedin=true";
-      }
+      },
     );
   } catch (e) {
     if (e.message) {

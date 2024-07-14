@@ -8,5 +8,5 @@ export default withNuxt(
       "no-console": "off",
       "vue/html-self-closing": "off",
     },
-  }
+  },
 );

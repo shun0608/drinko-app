@@ -14,7 +14,7 @@ const { drink, recommended: drinks } = await $apiFetch(
   `/api/drinks/${urlPathId}`,
   {
     method: "GET",
-  }
+  },
 );
 
 const drinkIngredients = [];
@@ -67,7 +67,7 @@ const updateFavorite = async () => {
   } catch (e) {
     showToast(
       "お気に入り機能をご利用いただくには、ログインが必要です。",
-      "error"
+      "error",
     );
   }
 };

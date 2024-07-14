@@ -16,18 +16,18 @@ const { value: email, errorMessage: emailError } = useField(
   yup
     .string()
     .required("この項目は必須です")
-    .email("メールアドレスの形式で入力してください")
+    .email("メールアドレスの形式で入力してください"),
 );
 const { value: name, errorMessage: nameError } = useField(
   "name",
-  yup.string().required("この項目は必須です")
+  yup.string().required("この項目は必須です"),
 );
 const { value: password, errorMessage: passwordError } = useField(
   "password",
   yup
     .string()
     .required("この項目は必須です")
-    .min(8, "８文字以上で入力してください")
+    .min(8, "８文字以上で入力してください"),
 );
 
 const register = async () => {
@@ -52,7 +52,7 @@ const register = async () => {
     } else {
       showToast(
         "登録に失敗しました。お手数ですが、再度ご登録をお願いいたします。",
-        "error"
+        "error",
       );
     }
   }
