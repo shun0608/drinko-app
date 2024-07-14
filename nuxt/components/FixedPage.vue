@@ -1,13 +1,16 @@
 <script setup>
 const props = defineProps({
-  links: Object,
+  links: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 </script>
 
 <template>
   <div class="max-w-screen-lg mx-auto mt-8">
     <UBreadcrumb
-      :links="links"
+      :links="props.links"
       :ui="{
         wrapper: 'mx-4',
         li: 'text-primary dark:text-primary',
