@@ -3,7 +3,8 @@ export default defineNuxtConfig({
     'nuxt-sanctum-auth',
     "@nuxt/ui",
     "@nuxtjs/seo",
-    "@stefanobartoletti/nuxt-social-share"
+    "@stefanobartoletti/nuxt-social-share",
+    "@nuxt/eslint"
   ],
   ssr: false,
   devtools: { enabled: true },

@@ -7,9 +7,12 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
+    "@nuxt/eslint": "^0.3.13",
     "@nuxt/ui": "^2.17.0",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/proxy": "^2.1.0",
@@ -27,8 +30,16 @@
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
   "devDependencies": {
+    "@eslint/js": "^9.7.0",
     "@nuxt/types": "^2.17.3",
+    "@nuxtjs/eslint-module": "^4.1.0",
     "@types/node": "^20.14.2",
-    "sass": "^1.77.5"
+    "eslint": "^9.7.0",
+    "eslint-plugin-nuxt": "^4.0.0",
+    "eslint-plugin-vue": "^9.27.0",
+    "globals": "^15.8.0",
+    "sass": "^1.77.5",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^7.16.0"
   }
 }
