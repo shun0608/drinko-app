@@ -73,9 +73,9 @@ router.afterEach(() => {
           <div class="flex">
             <div class="relative w-full">
               <input
-                type="search"
-                v-model="keyword"
                 id="search-dropdown"
+                v-model="keyword"
+                type="search"
                 class="search-dropdown block px-2 py-3 w-full z-20 text-gray-400 bg-white rounded-e-lg border border-gray-300 dark:bg-white dark:border-gray-300 dark:placeholder-gray-300 dark:text-gray-400 focus:outline-none"
                 placeholder="ソフトドリンク検索"
                 required
