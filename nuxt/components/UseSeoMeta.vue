@@ -56,4 +56,6 @@ useSeoMeta({
 });
 </script>
 
-<template></template>
+<template>
+  <div />
+</template>
