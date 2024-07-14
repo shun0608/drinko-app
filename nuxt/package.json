@@ -11,7 +11,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier . --write",
-    "prepare": "husky"
+    "prepare": "cd .. && husky nuxt/.husky"
   },
   "dependencies": {
     "@nuxt/eslint": "^0.3.13",
