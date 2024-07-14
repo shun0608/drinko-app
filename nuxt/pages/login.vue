@@ -1,10 +1,10 @@
 <script setup>
+import { useField } from "vee-validate";
+import * as yup from "yup";
+
 definePageMeta({
   middleware: "guest",
 });
-
-import { useField } from "vee-validate";
-import * as yup from "yup";
 
 const { $sanctumAuth } = useNuxtApp();
 const { $toast } = useNuxtApp();
@@ -50,52 +50,54 @@ const login = async () => {
 </script>
 
 <template>
-  <UseSeoMeta title="ログイン" description="Drinkoログインページ" />
-  <AuthWhiteBack>
-    <template #form-title>ログイン</template>
-    <template #content>
-      <form>
-        <label class="form-control w-full max-w-lg mx-auto mt-10">
-          <div class="label">
-            <span class="label-text">メールアドレス</span>
+  <div>
+    <UseSeoMeta title="ログイン" description="Drinkoログインページ" />
+    <AuthWhiteBack>
+      <template #form-title>ログイン</template>
+      <template #content>
+        <form>
+          <label class="form-control w-full max-w-lg mx-auto mt-10">
+            <div class="label">
+              <span class="label-text">メールアドレス</span>
+            </div>
+            <input
+              id="email"
+              v-model="email"
+              type="string"
+              class="input input-bordered w-full max-w-lg"
+            />
+            <p class="text-error mt-2">{{ emailError }}</p>
+          </label>
+          <label class="form-control w-full max-w-lg mx-auto mt-4">
+            <div class="label">
+              <span class="label-text">パスワード</span>
+            </div>
+            <input
+              id="password"
+              v-model="password"
+              type="password"
+              class="input input-bordered w-full max-w-lg"
+            />
+            <p class="text-error mt-2">{{ passwordError }}</p>
+          </label>
+          <div class="flex justify-center mt-10">
+            <button
+              type="button"
+              class="btn btn-block btn-neutral max-w-lg"
+              @click="login"
+            >
+              ログイン
+            </button>
           </div>
-          <input
-            id="email"
-            type="string"
-            v-model="email"
-            class="input input-bordered w-full max-w-lg"
-          />
-          <p class="text-error mt-2">{{ emailError }}</p>
-        </label>
-        <label class="form-control w-full max-w-lg mx-auto mt-4">
-          <div class="label">
-            <span class="label-text">パスワード</span>
-          </div>
-          <input
-            id="password"
-            type="password"
-            v-model="password"
-            class="input input-bordered w-full max-w-lg"
-          />
-          <p class="text-error mt-2">{{ passwordError }}</p>
-        </label>
-        <div class="flex justify-center mt-10">
-          <button
-            type="button"
-            @click="login"
-            class="btn btn-block btn-neutral max-w-lg"
+        </form>
+        <div class="flex flex-col justify-center items-center mt-6">
+          <p class="font-bold">アカウントをお持ちで無い方</p>
+          <NuxtLink role="button" class="btn max-w-lg mt-3" href="/register"
+            >新規登録（無料）</NuxtLink
           >
-            ログイン
-          </button>
+          <back-to-top-link />
         </div>
-      </form>
-      <div class="flex flex-col justify-center items-center mt-6">
-        <p class="font-bold">アカウントをお持ちで無い方</p>
-        <NuxtLink role="button" class="btn max-w-lg mt-3" href="/register"
-          >新規登録（無料）</NuxtLink
-        >
-        <back-to-top-link />
-      </div>
-    </template>
-  </AuthWhiteBack>
+      </template>
+    </AuthWhiteBack>
+  </div>
 </template>
