@@ -60,79 +60,81 @@ const register = async () => {
 </script>
 
 <template>
-  <UseSeoMeta
-    title="新規ユーザー登録"
-    description="Drinkoの新規ユーザー登録ページ。"
-  />
-  <AuthWhiteBack>
-    <template #form-title>新規ユーザー登録</template>
-    <template #content>
-      <form>
-        <label class="form-control w-full max-w-lg mx-auto mt-10">
-          <div class="label">
-            <span class="label-text"
-              >ニックネーム<span class="text-error">*</span></span
+  <div>
+    <UseSeoMeta
+      title="新規ユーザー登録"
+      description="Drinkoの新規ユーザー登録ページ。"
+    />
+    <AuthWhiteBack>
+      <template #form-title>新規ユーザー登録</template>
+      <template #content>
+        <form>
+          <label class="form-control w-full max-w-lg mx-auto mt-10">
+            <div class="label">
+              <span class="label-text"
+                >ニックネーム<span class="text-error">*</span></span
+              >
+            </div>
+            <input
+              id="name"
+              v-model="name"
+              type="string"
+              class="input input-bordered w-full max-w-lg"
+            />
+            <p class="text-error mt-2">{{ nameError }}</p>
+          </label>
+          <label class="form-control w-full max-w-lg mx-auto mt-4">
+            <div class="label">
+              <span class="label-text"
+                >メールアドレス<span class="text-error">*</span></span
+              >
+            </div>
+            <input
+              id="email"
+              v-model="email"
+              type="string"
+              class="input input-bordered w-full max-w-lg"
+            />
+            <p class="text-error mt-2">{{ emailError }}</p>
+          </label>
+          <label class="form-control w-full max-w-lg mx-auto mt-4">
+            <div class="label">
+              <span class="label-text"
+                >パスワード<span class="text-error">*</span></span
+              >
+            </div>
+            <input
+              id="password"
+              v-model="password"
+              type="password"
+              class="input input-bordered w-full max-w-lg"
+            />
+            <p class="text-error mt-2">{{ passwordError }}</p>
+          </label>
+          <div class="flex justify-center mt-10">
+            <button
+              type="button"
+              class="btn btn-block btn-neutral max-w-lg"
+              @click="register"
             >
+              登録
+            </button>
           </div>
-          <input
-            id="name"
-            type="string"
-            v-model="name"
-            class="input input-bordered w-full max-w-lg"
-          />
-          <p class="text-error mt-2">{{ nameError }}</p>
-        </label>
-        <label class="form-control w-full max-w-lg mx-auto mt-4">
-          <div class="label">
-            <span class="label-text"
-              >メールアドレス<span class="text-error">*</span></span
-            >
+          <div class="flex flex-col justify-center items-center mt-4">
+            <p class="max-w-lg text-gray-400">
+              登録ボタンをクリックされると、<NuxtLink
+                href="/terms-of-use"
+                class="underline"
+                >利用規約</NuxtLink
+              >および
+              <NuxtLink href="/privacy-policy" class="underline"
+                >プライバシーポリシー</NuxtLink
+              >に同意されたこととなります。
+            </p>
+            <back-to-top-link />
           </div>
-          <input
-            id="email"
-            type="string"
-            v-model="email"
-            class="input input-bordered w-full max-w-lg"
-          />
-          <p class="text-error mt-2">{{ emailError }}</p>
-        </label>
-        <label class="form-control w-full max-w-lg mx-auto mt-4">
-          <div class="label">
-            <span class="label-text"
-              >パスワード<span class="text-error">*</span></span
-            >
-          </div>
-          <input
-            id="password"
-            type="password"
-            v-model="password"
-            class="input input-bordered w-full max-w-lg"
-          />
-          <p class="text-error mt-2">{{ passwordError }}</p>
-        </label>
-        <div class="flex justify-center mt-10">
-          <button
-            type="button"
-            @click="register"
-            class="btn btn-block btn-neutral max-w-lg"
-          >
-            登録
-          </button>
-        </div>
-        <div class="flex flex-col justify-center items-center mt-4">
-          <p class="max-w-lg text-gray-400">
-            登録ボタンをクリックされると、<NuxtLink
-              href="/terms-of-use"
-              class="underline"
-              >利用規約</NuxtLink
-            >および
-            <NuxtLink href="/privacy-policy" class="underline"
-              >プライバシーポリシー</NuxtLink
-            >に同意されたこととなります。
-          </p>
-          <back-to-top-link />
-        </div>
-      </form>
-    </template>
-  </AuthWhiteBack>
+        </form>
+      </template>
+    </AuthWhiteBack>
+  </div>
 </template>
