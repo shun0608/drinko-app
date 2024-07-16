@@ -47,7 +47,6 @@ class FavoriteController extends Controller
         $favorite->user_id = Auth::id();
         $favorite->save();
 
-        // return response()->json(['message' => 'お気に入りに登録されました。'], 201);
         return response()->json(true, 201);
     }
 
@@ -82,7 +81,6 @@ class FavoriteController extends Controller
     {
         Favorite::where('drink_id', $drinkId)->where('user_id', Auth::id())->delete();
 
-        // return response()->json(['message' => 'お気に入りから削除されました'], 200);
         return response()->json(false, 200);
     }
 
