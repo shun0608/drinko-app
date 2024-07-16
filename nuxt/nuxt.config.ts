@@ -16,8 +16,8 @@ export default defineNuxtConfig({
   },
   nuxtSanctumAuth: {
     token: false,
-    baseUrl: "http://localhost:8000",
-    // baseUrl: "https://api.drinko.jp",
+    // baseUrl: "http://localhost:8000",
+    baseUrl: "https://api.drinko.jp",
     endpoints: {
       csrf: "/sanctum/csrf-cookie",
       login: "/api/login",
