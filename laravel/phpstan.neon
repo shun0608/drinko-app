@@ -7,6 +7,3 @@ parameters:
         - app/
 
     level: 5
-
-    ignoreErrors:
-    - '#Call to an undefined method Illuminate\\Contracts\\Pagination\\LengthAwarePaginator::withPath\(\).#'
