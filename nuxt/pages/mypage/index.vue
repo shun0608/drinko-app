@@ -9,7 +9,7 @@ const { $apiFetch } = useNuxtApp();
 const favoriteDrinks = ref([]);
 const fetchFavorites = async () => {
   try {
-    const response = await $apiFetch(`/api/mypage/${user.id}`, {
+    const response = await $apiFetch(`/api/mypage`, {
       method: "GET",
     });
     favoriteDrinks.value = response;

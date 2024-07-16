@@ -248,9 +248,7 @@ router.afterEach(() => {
             class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
           >
             <li>
-              <NuxtLink class="py-2" :to="`/mypage/${auth.user.id}`">
-                プロフィール
-              </NuxtLink>
+              <NuxtLink class="py-2" href="/mypage"> プロフィール </NuxtLink>
             </li>
             <li>
               <NuxtLink class="py-2" @click="logout()">ログアウト</NuxtLink>

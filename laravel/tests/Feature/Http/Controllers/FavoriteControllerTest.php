@@ -21,10 +21,8 @@ class FavoriteControllerTest extends TestCase
         $favorites = Favorite::factory(2)->create();
 
         $user = $favorites->first()->user;
-        $user_id = $user->id;
-        $url = 'api/mypage/' . $user_id;
 
-        $response = $this->actingAs($user)->get($url);
+        $response = $this->actingAs($user)->get('api/mypage/');
 
         $userFavorites = Favorite::where('user_id', $user->id)->pluck('drink_id');
 

@@ -15,17 +15,11 @@ class FavoriteController extends Controller
      */
     public function index(): JsonResponse
     {
-        $user = Auth::user();
-        if ($user) {
-            $userId = $user->id;
-            $userFavorites = Favorite::where('user_id', $userId)->pluck('drink_id');
-            if ($userFavorites->isNotEmpty()) {
-                $drinks = Drink::whereIn('id', $userFavorites)->get();
-
-                return response()->json($drinks);
-            } else {
-                return response()->json(['error' => 'お気に入りに追加したドリンクがありません'], 404);
-            }
+        if (Auth::user()) {
+            $drinks = Drink::whereHas('favorites', function ($q) {
+                $q->where('user_id', Auth::id());
+            })->get();
+            return response()->json($drinks);
         } else {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
@@ -42,11 +36,11 @@ class FavoriteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(int $drinkId, int $userId): JsonResponse
+    public function store(int $drinkId): JsonResponse
     {
         $favorite = new Favorite;
         $favorite->drink_id = $drinkId;
-        $favorite->user_id = $userId;
+        $favorite->user_id = Auth::id();
         $favorite->save();
 
         return response()->json(['message' => 'お気に入りに登録されました。'], 201);
@@ -79,9 +73,9 @@ class FavoriteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(int $drinkId, int $userId): JsonResponse
+    public function destroy(int $drinkId): JsonResponse
     {
-        Favorite::where('drink_id', $drinkId)->where('user_id', $userId)->delete();
+        Favorite::where('drink_id', $drinkId)->where('user_id', Auth::id())->delete();
 
         return response()->json(['message' => 'お気に入りから削除されました'], 200);
     }
@@ -89,11 +83,9 @@ class FavoriteController extends Controller
     /**
      * Check if a drink is in the user's favorites.
      */
-    public function isFavorite(int $drinkId, ?int $userId = null): bool
+    public function isFavorite(int $drinkId): bool
     {
-        $userId = $userId ?? Auth::id();
-
-        return Favorite::where('drink_id', $drinkId)->where('user_id', $userId)->exists();
+        return Favorite::where('drink_id', $drinkId)->where('user_id', Auth::id())->exists();
     }
 
     /**
@@ -101,14 +93,12 @@ class FavoriteController extends Controller
      */
     public function toggleFavorite(int $drinkId): callable|JsonResponse
     {
-        $user = Auth::user();
-        if (isset($user)) {
-            $userId = $user->id;
-            $isFavorite = $this->isFavorite($drinkId, $userId);
+        if (Auth::user()) {
+            $isFavorite = $this->isFavorite($drinkId);
             if ($isFavorite) {
-                return $this->destroy($drinkId, $userId);
+                return $this->destroy($drinkId);
             } else {
-                return $this->store($drinkId, $userId);
+                return $this->store($drinkId);
             }
         } else {
             return response()->json(['error' => 'お気に入り機能をご利用いただくには、ログインが必要です。'], 401);
