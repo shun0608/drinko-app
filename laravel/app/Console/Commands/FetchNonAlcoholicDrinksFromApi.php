@@ -11,13 +11,20 @@ class FetchNonAlcoholicDrinksFromApi extends Command
     protected $signature = 'app:fetch-non-alcoholic-drinks-from-api';
 
     protected $description = 'Fetch non alcoholic drink data from TheCocktailDB';
+    /** 補足
+     * TheCocktailDB APIの仕様で以下の手順でドリンク情報を取得する必要があります。
+     * 1. ノンアルコールドリンクのID一覧を取得
+     * 2. 取得したIDからドリンクの詳細情報を取得
+     * 3. 取得した詳細情報を翻訳
+     * ここでは、1.を実行しています。
+     *  */
 
     public function handle()
     {
         $non_alcoholic_response = Http::get('https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic');
 
         if ($non_alcoholic_response->failed()) {
-            $this->error('Request failed: '.$non_alcoholic_response->body());
+            $this->error('Request failed: ' . $non_alcoholic_response->body());
 
             return 0;
         }

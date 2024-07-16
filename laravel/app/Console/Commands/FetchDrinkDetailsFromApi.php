@@ -11,6 +11,13 @@ class FetchDrinkDetailsFromApi extends Command
     protected $signature = 'app:fetch-drink-details-from-api';
 
     protected $description = 'Fetch detailed drink recipes based on drinks_id from TheCocktailDB API';
+    /** 補足
+     * TheCocktailDB APIの仕様で以下の手順でドリンク情報を取得する必要があります。
+     * 1. ノンアルコールドリンクのID一覧を取得
+     * 2. 取得したIDからドリンクの詳細情報を取得
+     * 3. 取得した詳細情報を翻訳
+     * ここでは、2.を実行しています。
+     *  */
 
     public function handle()
     {
