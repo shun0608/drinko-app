@@ -39,15 +39,17 @@ class DrinkController extends Controller
     public function show(int $id): JsonResponse
     {
         $drink = Drink::find($id);
-        if (! $drink) {
+        if (!$drink) {
             return response()->json(['message' => 'お探しのドリンクは存在しません'], 404);
         }
-        $recommendedDrinks = Drink::where('id', '!=', $id)->inRandomOrder()->take(3)->get();
+        $recommended = Drink::where('id', '!=', $id)->inRandomOrder()->take(3)->get();
 
-        return response()->json([
-            'drink' => $drink,
-            'recommended' => $recommendedDrinks,
-        ]);
+        return response()->json(
+            compact(
+                'drink',
+                'recommended'
+            )
+        );
     }
 
     /**
