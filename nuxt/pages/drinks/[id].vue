@@ -50,22 +50,11 @@ const links = useBreadcrumbItems({
   ],
 });
 
-const updateIsFavoriteStatus = async () => {
-  try {
-    isFavorite.value = await $apiFetch(`/api/isFavorite/${urlPathId}`, {
-      method: "GET",
-    });
-  } catch (e) {
-    console.error(e.response);
-  }
-};
-
 const updateFavorite = async () => {
   try {
     isFavorite.value = await $apiFetch(`api/favorite/${urlPathId}/`, {
       method: "POST",
     });
-    await updateIsFavoriteStatus();
   } catch (e) {
     showToast(
       "お気に入り機能をご利用いただくには、ログインが必要です。",
@@ -73,8 +62,6 @@ const updateFavorite = async () => {
     );
   }
 };
-
-onMounted(updateIsFavoriteStatus);
 </script>
 
 <template>
