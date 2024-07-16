@@ -8,7 +8,7 @@ const showToast = (message, type) => {
   });
 };
 
-const urlPathId = location.pathname.split("/")[2];
+const urlPathId = useRoute().params.id;
 
 const { drink, recommended: drinks } = await $apiFetch(
   `/api/drinks/${urlPathId}`,
