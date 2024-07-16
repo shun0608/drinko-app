@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class DrinkFactory extends Factory
 {
-
     /**
      * Define the model's default state.
      *
@@ -20,10 +19,10 @@ class DrinkFactory extends Factory
 
         $ingredients = [];
         for ($i = 1; $i <= 15; $i++) {
-            $ingredients['ingredient_en' . $i] = fake()->sentence(3);
-            $ingredients['ingredient_ja' . $i] = fake()->realText(12);
-            $ingredients['measure_en' . $i] = fake()->sentence(2);
-            $ingredients['measure_ja' . $i] = fake()->realText(12);
+            $ingredients['ingredient_en'.$i] = fake()->sentence(3);
+            $ingredients['ingredient_ja'.$i] = fake()->realText(12);
+            $ingredients['measure_en'.$i] = fake()->sentence(2);
+            $ingredients['measure_ja'.$i] = fake()->realText(12);
         }
 
         $test = [
@@ -34,6 +33,7 @@ class DrinkFactory extends Factory
             'recipe_ja' => fake()->realText(40),
             'image_url' => 'https://www.thecocktaildb.com/images/media/drink/vuquyv1468876052.jpg',
         ];
+
         return $test + $ingredients;
     }
 }

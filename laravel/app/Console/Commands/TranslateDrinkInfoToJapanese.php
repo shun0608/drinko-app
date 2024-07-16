@@ -11,6 +11,7 @@ class TranslateDrinkInfoToJapanese extends Command
     protected $signature = 'app:translate-drink-info-to-japanese';
 
     protected $description = 'Translate drink information from English to Japanese';
+
     /** 補足
      * TheCocktailDB APIの仕様で以下の手順でドリンク情報を取得する必要があります。
      * 1. ノンアルコールドリンクのID一覧を取得
@@ -18,7 +19,6 @@ class TranslateDrinkInfoToJapanese extends Command
      * 3. 取得した詳細情報を翻訳
      * ここでは、3.を実行しています。
      *  */
-
     public function handle()
     {
         $tr = new GoogleTranslate('ja');
@@ -27,10 +27,10 @@ class TranslateDrinkInfoToJapanese extends Command
         foreach ($drinks as $drink) {
             $drink->name_ja = $tr->translate($drink->name_en);
             for ($i = 1; $i <= 15; $i++) {
-                $ingredient_property_ja = 'ingredient_ja' . $i;
-                $ingredient_property_en = 'ingredient_en' . $i;
-                $measure_property_ja = 'measure_ja' . $i;
-                $measure_property_en = 'measure_en' . $i;
+                $ingredient_property_ja = 'ingredient_ja'.$i;
+                $ingredient_property_en = 'ingredient_en'.$i;
+                $measure_property_ja = 'measure_ja'.$i;
+                $measure_property_en = 'measure_en'.$i;
                 if ($drink->$ingredient_property_en) {
                     $drink->$ingredient_property_ja = $tr->translate($drink->$ingredient_property_en);
                 }

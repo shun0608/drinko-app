@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Drink;
+use App\Traits\IsFavoriteTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\Traits\IsFavoriteTrait;
 
 class DrinkController extends Controller
 {
     use IsFavoriteTrait;
+
     /**
      * Display a paginated list of drinks.
      */
@@ -41,7 +42,7 @@ class DrinkController extends Controller
     public function show(int $id): JsonResponse
     {
         $drink = Drink::find($id);
-        if (!$drink) {
+        if (! $drink) {
             return response()->json(['message' => 'お探しのドリンクは存在しません'], 404);
         }
         $recommended = Drink::where('id', '!=', $id)->inRandomOrder()->take(3)->get();

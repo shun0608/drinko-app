@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Drink;
 use App\Models\Favorite;
+use App\Traits\IsFavoriteTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Traits\IsFavoriteTrait;
 
 class FavoriteController extends Controller
 {
     use IsFavoriteTrait;
+
     /**
      * Display a listing of the resource.
      */
@@ -21,6 +22,7 @@ class FavoriteController extends Controller
             $drinks = Drink::whereHas('favorites', function ($q) {
                 $q->where('user_id', Auth::id());
             })->get();
+
             return response()->json($drinks);
         } else {
             return response()->json(['error' => 'Unauthorized'], 401);

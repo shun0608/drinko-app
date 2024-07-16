@@ -23,7 +23,7 @@ class SearchController extends Controller
             $search_split = mb_convert_kana($keyword, 's');
             $search_split2 = preg_split('/[\s]+/', $search_split, -1, PREG_SPLIT_NO_EMPTY);
             foreach ($search_split2 as $value) {
-                $query->orWhere('name_en', 'LIKE', '%' . $value . '%')->orWhere('name_ja', 'LIKE', '%' . $value . '%');
+                $query->orWhere('name_en', 'LIKE', '%'.$value.'%')->orWhere('name_ja', 'LIKE', '%'.$value.'%');
             }
         }
         $drinks = $query->paginate(12)->withPath('/search')->appends(['keyword' => $keyword]);

@@ -2,16 +2,15 @@
 
 namespace Tests\Feature\Http\Controllers;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use App\Models\User;
 use App\Models\Drink;
 use App\Models\Favorite;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class FavoriteControllerTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * A basic feature test example.
      */
@@ -40,7 +39,7 @@ class FavoriteControllerTest extends TestCase
             [
                 'id' => $drinks->first()->id,
                 'name_en' => $drinks->first()->name_en,
-            ]
+            ],
         ]);
     }
 }
