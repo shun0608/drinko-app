@@ -14,17 +14,16 @@ class TranslateDrinkInfoToJapanese extends Command
 
     public function handle()
     {
-        $tr = new GoogleTranslate('ja'); // Translates into Japanese
-        $drinks = Drink::select('cocktailDB_id')->get();
+        $tr = new GoogleTranslate('ja');
+        $drinks = Drink::get();
 
         foreach ($drinks as $drink) {
-            $drink = Drink::where('cocktailDB_id', $drink['cocktailDB_id'])->first();
             $drink->name_ja = $tr->translate($drink->name_en);
             for ($i = 1; $i <= 15; $i++) {
-                $ingredient_property_ja = 'ingredient_ja'.$i;
-                $ingredient_property_en = 'ingredient_en'.$i;
-                $measure_property_ja = 'measure_ja'.$i;
-                $measure_property_en = 'measure_en'.$i;
+                $ingredient_property_ja = 'ingredient_ja' . $i;
+                $ingredient_property_en = 'ingredient_en' . $i;
+                $measure_property_ja = 'measure_ja' . $i;
+                $measure_property_en = 'measure_en' . $i;
                 if ($drink->$ingredient_property_en) {
                     $drink->$ingredient_property_ja = $tr->translate($drink->$ingredient_property_en);
                 }
