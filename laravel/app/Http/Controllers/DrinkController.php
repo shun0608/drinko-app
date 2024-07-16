@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Drink;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Traits\IsFavoriteTrait;
 
 class DrinkController extends Controller
 {
+    use IsFavoriteTrait;
     /**
      * Display a paginated list of drinks.
      */
@@ -44,10 +46,13 @@ class DrinkController extends Controller
         }
         $recommended = Drink::where('id', '!=', $id)->inRandomOrder()->take(3)->get();
 
+        $fetchedIsFavorite = $this->isFavorite($id);
+
         return response()->json(
             compact(
                 'drink',
-                'recommended'
+                'recommended',
+                'fetchedIsFavorite'
             )
         );
     }

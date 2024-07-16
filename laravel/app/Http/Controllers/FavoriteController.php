@@ -7,9 +7,11 @@ use App\Models\Favorite;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Traits\IsFavoriteTrait;
 
 class FavoriteController extends Controller
 {
+    use IsFavoriteTrait;
     /**
      * Display a listing of the resource.
      */
@@ -78,14 +80,6 @@ class FavoriteController extends Controller
         Favorite::where('drink_id', $drinkId)->where('user_id', Auth::id())->delete();
 
         return response()->json(['message' => 'お気に入りから削除されました'], 200);
-    }
-
-    /**
-     * Check if a drink is in the user's favorites.
-     */
-    public function isFavorite(int $drinkId): bool
-    {
-        return Favorite::where('drink_id', $drinkId)->where('user_id', Auth::id())->exists();
     }
 
     /**
