@@ -10,12 +10,17 @@ const showToast = (message, type) => {
 
 const urlPathId = useRoute().params.id;
 
-const { drink, recommended: drinks } = await $apiFetch(
-  `/api/drinks/${urlPathId}`,
-  {
-    method: "GET",
-  },
-);
+const isFavorite = ref(false);
+
+const {
+  drink,
+  recommended: drinks,
+  fetchedIsFavorite,
+} = await $apiFetch(`/api/drinks/${urlPathId}`, {
+  method: "GET",
+});
+
+isFavorite.value = fetchedIsFavorite;
 
 const drinkIngredients = [];
 for (let i = 1; i <= 15; i++) {
@@ -45,14 +50,11 @@ const links = useBreadcrumbItems({
   ],
 });
 
-const isFavorite = ref(false);
-
 const updateIsFavoriteStatus = async () => {
   try {
-    const response = await $apiFetch(`/api/isFavorite/${urlPathId}`, {
+    isFavorite.value = await $apiFetch(`/api/isFavorite/${urlPathId}`, {
       method: "GET",
     });
-    isFavorite.value = response;
   } catch (e) {
     console.error(e.response);
   }
@@ -60,7 +62,7 @@ const updateIsFavoriteStatus = async () => {
 
 const updateFavorite = async () => {
   try {
-    await $apiFetch(`api/favorite/${urlPathId}/`, {
+    isFavorite.value = await $apiFetch(`api/favorite/${urlPathId}/`, {
       method: "POST",
     });
     await updateIsFavoriteStatus();
