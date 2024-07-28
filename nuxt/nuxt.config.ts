@@ -5,6 +5,7 @@ export default defineNuxtConfig({
     "@nuxtjs/seo",
     "@stefanobartoletti/nuxt-social-share",
     "@nuxt/eslint",
+    "nuxt-gtag"
   ],
   ssr: false,
   devtools: { enabled: true },
@@ -34,5 +35,8 @@ export default defineNuxtConfig({
       login: "/login",
       logout: "/",
     },
+  },
+  gtag: {
+    id: 'G-W2H17QKP7B'
   },
 });
